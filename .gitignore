@@ -1,0 +1,23 @@
+# System files
+.DS_Store
+
+# Object files
+*.o
+
+# Libraries
+*.lib
+*.a
+
+# Testing
+test/
+eval_tests/
+
+# Executables
+*.out
+run_test
+
+# Temp files
+*.swp
+
+# Debug files
+*.dSYM/

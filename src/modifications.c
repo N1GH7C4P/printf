@@ -6,12 +6,12 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:06:08 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/03/14 17:13:05 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/22 01:16:29 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include "libft.h"
+#include "../include/printf.h"
+#include "../include/libft.h"
 
 int	apply_modifications(char *str, t_dstr *output)
 {
@@ -34,7 +34,7 @@ int	apply_modifications(char *str, t_dstr *output)
 	apply_space_modification(&str, output);
 	apply_forced_sign_modification(&str, output);
 	output = dstrcat(output, str);
-	return (output->digits + 1);
+	return (ft_strlen(str));
 }
 
 void	apply_width_modification(char **str, t_dstr *output)

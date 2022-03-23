@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpolojar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:33:53 by kpolojar          #+#    #+#             */
-/*   Updated: 2021/11/26 16:21:54 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/03/22 01:19:18 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 	unsigned int	i;
 	unsigned int	s_len;
 
+	if (!s)
+		return (NULL);
 	s_len = ft_strlen((char *)s);
 	if (start >= s_len)
 		return (ft_strnew(0));

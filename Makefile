@@ -3,14 +3,14 @@
 
 NAME		= libftprintf.a
 PRINTFLIB	= ftprintf
-INCLUDE		= include
+INCLUDE		= -I include
 LIBFT		= libft
 SRC_DIR		= src/
-OBJ_DIR		= obj/
+OBJ_DIR		= src/
 TEST_DIR	= test/
 TEST_EXE	= run_test
 CC			= clang
-CFLAGS		= -Wall -Werror -Wextra -I
+CFLAGS		= -Wall -Werror -Wextra -O3 -fPIE
 RM			= rm -f
 AR			= ar rcs
 
@@ -26,18 +26,12 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
-#Sources
-
 SRC_FILES	=	dstring formatting ft_ftoa ft_itoabase handlers modifications printf
 TEST_FILES	=	test1 test2 test3 test4 test5 main
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 TEST 		= 	$(addprefix $(TEST_DIR), $(addsuffix .test.c, $(TEST_FILES)))
-
-###
-
-OBJF		=	.cache_exists
 
 all:		$(NAME)
 
@@ -48,15 +42,8 @@ $(NAME):	$(OBJ)
 			@$(AR) $(NAME) $(OBJ)
 			@echo "$(GREEN)ft_printf compiled!$(DEF_COLOR)"
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
-			@echo "$(YELLOW)Compiling: $< $(DEF_COLOR)"
-			@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-
-$(OBJF):
-			@mkdir -p $(OBJ_DIR)
-
 clean:
-			@$(RM) -rf $(OBJ_DIR)
+			@$(RM) -rf $(OBJ)
 			@make clean -C $(LIBFT)
 			@echo "$(BLUE)ft_printf object files cleaned!$(DEF_COLOR)"
 

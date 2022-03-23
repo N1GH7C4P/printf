@@ -6,13 +6,12 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 16:13:34 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/03/14 17:00:57 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/23 21:53:41 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include "libft.h"
-#include "stdint.h"
+#include "../include/printf.h"
+#include "../include/libft.h"
 
 int	handle_width(t_dstr *output, char *input)
 {
@@ -70,16 +69,40 @@ int	handle_length(t_dstr *output, char *input)
 	return (i);
 }
 
-void	str_toupper(char **str)
+char *str_toupper(char *src)
 {
-	size_t	len;
+	char	*dest;
+	int		i;
 
-	len = ft_strlen(*str);
-	while (len)
+	if (!src)
+		return (ft_strnew(0));
+	dest = ft_strnew(ft_strlen(src));
+	i = 0;
+	while (src[i])
 	{
-		*str[len - 1] = (char)ft_toupper((int)*str[len - 1]);
-		len--;
+		dest[i] = (char)ft_toupper((int) src[i]);
+		i++;
 	}
+	return (dest);
+}
+
+int handle_precision(t_dstr *output, char *input)
+{
+	int i;
+
+	i = 1;
+	output->dot = 1;
+	if (input[i] > '0' && input[i] <= '9')
+	{
+		output->precision = ft_atoi(input + i);
+		i += ft_countdigits(output->precision, 10);
+		return (i);
+	}
+	else if (input[i] == '0')
+		i++;
+	output->precision = 0;
+	output->zero_precision = 1;
+	return (i);
 }
 
 int	handle_conversion(t_dstr *output, va_list vl, char c)
@@ -98,12 +121,14 @@ int	handle_conversion(t_dstr *output, va_list vl, char c)
 	else if (c == 'd' || c == 'i')
 		str = format_real_numbers(output, vl);
 	else if (c == 's')
-		str = format_str(str, output, vl);
+		str = format_str(output, vl);
 	else if (c == 'p')
 		str = ft_strjoin("0x", ft_itoabase(va_arg(vl, unsigned long long), 16));
 	else if (c == 'X' || c == 'x')
 		str = format_hexadecimal_numbers(c, output, vl);
 	else if (c == 'f')
 		str = format_floats(output, vl);
+	if (!str)
+		str = ft_strdup("(null)");
 	return (apply_modifications(str, output));
 }

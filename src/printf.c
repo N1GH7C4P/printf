@@ -6,13 +6,12 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:14:47 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/03/12 01:04:50 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/23 03:06:24 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include "libft.h"
-#include "stdint.h"
+#include "../include/printf.h"
+#include "../include/libft.h"
 
 //%[flags][width][.precision][length modifier]conversion
 
@@ -40,13 +39,8 @@ int	ft_printf(char *str, ...)
 				continue ;
 			}
 			if (str[i] == '.')
-			{
-				output->precision = ft_atoi(str + ++i);
-				i += ft_countdigits(output->precision, 10);
-			}
-			else
-				output->precision = 6;
-			i = i + handle_length(output, str + i);
+				i += handle_precision(output, str + i);
+			i += handle_length(output, str + i);
 			handle_conversion(output, vl, str[i]);
 		}
 		else
@@ -54,7 +48,6 @@ int	ft_printf(char *str, ...)
 		i++;
 	}
 	ft_putstr(output->content);
-	dstrdel(output);
-	va_end(vl);
-	return (i);
+	va_end (vl);
+	return (ft_strlen(output->content));
 }

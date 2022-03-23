@@ -6,12 +6,12 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 15:46:38 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/03/14 16:11:19 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/23 02:24:41 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-#include "libft.h"
+#include "../include/printf.h"
+#include "../include/libft.h"
 
 void	reset_dstr_flags_and_mods(t_dstr *dstr)
 {
@@ -28,6 +28,8 @@ void	reset_dstr_flags_and_mods(t_dstr *dstr)
 	dstr->is_negative = 0;
 	dstr->digits = 0;
 	dstr->padding = 0;
+	dstr->dot = 0;
+	dstr->zero_precision = 0;
 }
 
 void	dstrdel(t_dstr *s)
@@ -62,6 +64,10 @@ t_dstr	*dstrcat(t_dstr *dst, char *src)
 	size_t	src_len;
 	size_t	dst_len;
 
+	if (!dst)
+		return (NULL);
+	if (!src)
+		return (dst);
 	src_len = ft_strlen(src);
 	dst_len = ft_strlen(dst->content);
 	if (dst->size <= src_len + dst_len)
@@ -84,6 +90,10 @@ t_dstr	*dstrncat(t_dstr *dst, char *src, size_t n)
 	char	*temp;
 	size_t	dst_len;
 
+	if (!dst)
+		return (NULL);
+	if (!src)
+		return (dst);
 	dst_len = ft_strlen(dst->content);
 	if (dst->size < n + dst_len + 1)
 	{

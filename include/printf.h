@@ -6,7 +6,7 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 16:02:10 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/03/14 17:07:00 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/23 20:42:38 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_dstr
 	int		force_sign;
 	int		is_negative;
 	int		padding;
+	int		dot;
+	int		zero_precision;
 }	t_dstr;
 
 //Totally unintentional megastruct
@@ -51,18 +53,19 @@ char	*ft_ftoa(long double n, size_t precision);
 int		ft_printf(char *str, ...);
 
 // utility functions
-void	str_toupper(char **str);
+char	*str_toupper(char *src);
 
 // handlers
 int		handle_length(t_dstr *output, char *input);
 int		handle_flags(t_dstr *output, char *input);
 int		handle_width(t_dstr *output, char *input);
 int		handle_conversion(t_dstr *output, va_list vl, char c);
+int		handle_precision(t_dstr *output, char *input);
 
 // formatting
 char	*format_floats(t_dstr *s, va_list vl);
 char	*format_hexadecimal_numbers(char c, t_dstr *s, va_list vl);
-char	*format_str(char *str, t_dstr *s, va_list vl);
+char	*format_str(t_dstr *s, va_list vl);
 char	*format_unsigned_numbers(t_dstr *s, va_list vl);
 char	*format_real_numbers(t_dstr *s, va_list vl);
 

@@ -6,7 +6,7 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 17:53:36 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/03/11 23:43:28 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/25 23:21:26 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	*ft_strmap(char const *s, char (*f)(char));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_str_toupper(char *src);
 char	*ft_strtrim(char const *s);
 char	*ft_itoa(long long n);
 char	**ft_strsplit(char const *s, char c);

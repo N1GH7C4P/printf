@@ -26,7 +26,7 @@ MAGENTA = \033[0;95m
 CYAN = \033[0;96m
 WHITE = \033[0;97m
 
-SRC_FILES	=	dstring formatting ft_ftoa ft_itoabase handlers modifications printf
+SRC_FILES	=	dstring formatting_a formatting_b ft_ftoa ft_itoabase handlers modifications printf ft_ftoa_helpers
 TEST_FILES	=	test1 test2 test3 test4 test5 main
 
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))

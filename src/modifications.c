@@ -6,17 +6,17 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:06:08 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/03/25 22:56:40 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/25 23:17:26 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/printf.h"
 #include "../include/libft.h"
 
-char *place_sign(char *str, t_dstr *output, int index)
+char	*place_sign(char *str, t_dstr *output, int index)
 {
-	char *temp;
-	int len;
+	char	*temp;
+	int		len;
 
 	if (index == 0 && str[0] > '0' && str[0] < '9')
 	{
@@ -31,12 +31,12 @@ char *place_sign(char *str, t_dstr *output, int index)
 		str[index] = '+';
 	else if (output->space)
 		str[index] = ' ';
-	return(str);
+	return (str);
 }
 
 int	apply_modifications(char *str, t_dstr *output)
 {
-	if(str[0] == '-')
+	if (str[0] == '-')
 	{
 		output->is_negative = 1;
 		str = ft_strdup(str + 1);
@@ -58,15 +58,19 @@ char	*add_spaces_and_zeroes(t_dstr *output)
 	char	*ret;
 	int		precision;
 	int		width;
+
 	width = output->width;
 	precision = output->precision;
 	ret = ft_strnew(output->width);
-	if (output->zero_padding && !output->left_justify && output->padding && !output->zero_precision)
-	{	
-		while (precision)
-		{
-			ret[--width] = '0';
-			precision--;
+	if (output->zero_padding && !output->left_justify)
+	{
+		if (output->padding && !output->zero_precision)
+		{	
+			while (precision)
+			{
+				ret[--width] = '0';
+				precision--;
+			}
 		}
 	}
 	while (width > 0)
@@ -98,7 +102,7 @@ char	*apply_width_modification(char *str, t_dstr *output)
 char	*apply_sign_modification(char *str, t_dstr *output)
 {
 	char	*temp;
-	int 	i;
+	int		i;
 
 	i = 0;
 	if (output->space || output->force_sign || output->is_negative)

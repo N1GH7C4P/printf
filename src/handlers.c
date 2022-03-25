@@ -6,7 +6,7 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 16:13:34 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/03/25 21:05:05 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/25 23:21:51 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,9 @@ int	handle_length(t_dstr *output, char *input)
 	return (i);
 }
 
-char *str_toupper(char *src)
+int	handle_precision(t_dstr *output, char *input)
 {
-	char	*dest;
-	int		i;
-
-	if (!src)
-		return (ft_strnew(0));
-	dest = ft_strnew(ft_strlen(src));
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = (char)ft_toupper((int) src[i]);
-		i++;
-	}
-	return (dest);
-}
-
-int handle_precision(t_dstr *output, char *input)
-{
-	int i;
+	int	i;
 
 	i = 1;
 	output->dot = 1;

@@ -6,26 +6,12 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:31:42 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/03/23 16:51:29 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/25 23:53:39 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/printf.h"
 #include "../include/libft.h"
-
-int		find_dot(char *str)
-{
-	int count;
-	count = 0;
-
-	while (str[count])
-	{
-		if (str[count] == '.')
-			break ;
-		count++;
-	}
-	return (count);
-}
 
 char	*add_zeroes(char *str, int precision)
 {
@@ -53,21 +39,8 @@ char	*add_zeroes(char *str, int precision)
 	return (output);
 }
 
-int		check_f_digits(char *str)
+char	*round_number(int precision, int last_digit, char *str)
 {
-	while (*str)
-	{
-		if (*str++ > '0')
-			return (1);
-	}
-	return (0);
-}
-
-char	*round_number(long long nb, int precision, int last_digit)
-{
-	char	*str;
-
-	str = ft_itoabase(nb, 10);
 	if (!precision)
 	{
 		if (str[0] >= '5' && (check_f_digits(str + 1) || last_digit % 2))
@@ -104,22 +77,6 @@ static long double	to_whole_number(long double n, int pow)
 	return (n);
 }
 
-static int	count_fdigits(long double f, int max_precision)
-{
-	int	count;
-
-	if (max_precision == 1)
-		max_precision = 17;
-	count = 0;
-	while (count < max_precision)
-	{
-		f = f - (long long)f;
-		f = f * 10;
-		count++;
-	}
-	return (count);
-}
-
 static char	*combine(long double f_part, long long i_part, size_t precision)
 {
 	char	*i_str;
@@ -130,7 +87,7 @@ static char	*combine(long double f_part, long long i_part, size_t precision)
 	i_str = ft_itoabase(i_part, 10);
 	last_i_digit = i_str[ft_strlen(i_str) - 1] - '0';
 	f_part = to_whole_number(f_part, count_fdigits(f_part, precision + 1));
-	f_str = round_number(f_part, precision, last_i_digit);
+	f_str = round_number(precision, last_i_digit, ft_itoabase(f_part, 10));
 	if (f_str[0] == '1')
 	{
 		i_part++;

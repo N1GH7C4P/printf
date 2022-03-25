@@ -6,7 +6,7 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 16:02:10 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/03/25 16:36:23 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/25 23:49:04 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ char	*ft_ftoa(long double n, size_t precision);
 int		ft_printf(char *str, ...);
 
 // utility functions
-char	*str_toupper(char *src);
+int		find_dot(char *str);
+int		check_f_digits(char *str);
+int		count_fdigits(long double f, int max_precision);
 
 // handlers
 int		handle_length(t_dstr *output, char *input);

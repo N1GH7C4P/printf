@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: spuustin <spuustin@student.42.fr>          +#+  +:+       +#+         #
+#    By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/02 11:15:37 by kpolojar          #+#    #+#              #
-#    Updated: 2022/01/13 14:07:43 by spuustin         ###   ########.fr        #
+#    Updated: 2022/03/25 23:20:01 by linuxlite        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ FTS = strlen strdup strcpy strncpy strcat strncat strlcat strchr \
     putchar_fd putstr_fd putendl_fd putnbr_fd putchar putstr putendl \
     putnbr calloc lstnew foreach swap range count_if strlcpy lstdelone \
 	lstdelone lstdel lstadd lstiter lstmap countdigits strndup realloc \
-    get_next_line free_array sqrt lstrev
+    get_next_line free_array sqrt lstrev strtoupper
 
 FUNCS = $(patsubst %, ft_%, $(FTS))
 OBJ = $(patsubst %, %.o, $(FUNCS))

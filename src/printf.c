@@ -6,7 +6,7 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:14:47 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/03/23 03:06:24 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/25 23:13:23 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,8 @@
 
 //%[flags][width][.precision][length modifier]conversion
 
-int	ft_printf(char *str, ...)
+static void	parse(char *str, int i, t_dstr *output, va_list vl)
 {
-	va_list			vl;
-	int				i;
-	static t_dstr	*output;
-	
-	output = dstrnew("");
-	i = 0;
-	va_start(vl, str);
 	while (str && str[i])
 	{
 		reset_dstr_flags_and_mods(output);
@@ -47,6 +40,18 @@ int	ft_printf(char *str, ...)
 			output = dstrncat(output, &str[i], 1);
 		i++;
 	}
+}
+
+int	ft_printf(char *str, ...)
+{
+	va_list			vl;
+	int				i;
+	static t_dstr	*output;
+
+	output = dstrnew("");
+	i = 0;
+	va_start(vl, str);
+	parse(str, i, output, vl);
 	ft_putstr(output->content);
 	va_end (vl);
 	return (ft_strlen(output->content));

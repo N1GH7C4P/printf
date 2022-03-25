@@ -6,7 +6,7 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 16:13:34 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/03/23 21:53:41 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/25 21:05:05 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	handle_flags(t_dstr *output, char *input)
 	while (i < 5)
 	{
 		if (input[i] == '#')
-			output->binary_prefix = 1;
+			output->hex_prefix = 1;
 		else if (input[i] == '0')
 			output->zero_padding = 1;
 		else if (input[i] == '-')
@@ -92,7 +92,7 @@ int handle_precision(t_dstr *output, char *input)
 
 	i = 1;
 	output->dot = 1;
-	if (input[i] > '0' && input[i] <= '9')
+	if (input[1] > '0' && input[1] <= '9')
 	{
 		output->precision = ft_atoi(input + i);
 		i += ft_countdigits(output->precision, 10);
@@ -115,11 +115,12 @@ int	handle_conversion(t_dstr *output, va_list vl, char c)
 		str = ft_strnew(1);
 		c = (char)va_arg(vl, int);
 		ft_memcpy(str, &c, 1);
+		output->digits = 1;
 	}
 	else if (c == 'u')
-		str = format_unsigned_numbers(output, vl);
+		str = format_unsigned_numbers(output, vl, 10);
 	else if (c == 'd' || c == 'i')
-		str = format_real_numbers(output, vl);
+		str = format_numbers(output, vl, 10);
 	else if (c == 's')
 		str = format_str(output, vl);
 	else if (c == 'p')

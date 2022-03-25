@@ -6,7 +6,7 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 16:02:10 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/03/23 20:42:38 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/25 16:36:23 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_dstr
 	size_t	width;
 	size_t	precision;
 	size_t	digits;
-	int		binary_prefix;
+	int		hex_prefix;
 	int		zero_padding;
 	int		space;
 	int		left_justify;
@@ -66,13 +66,12 @@ int		handle_precision(t_dstr *output, char *input);
 char	*format_floats(t_dstr *s, va_list vl);
 char	*format_hexadecimal_numbers(char c, t_dstr *s, va_list vl);
 char	*format_str(t_dstr *s, va_list vl);
-char	*format_unsigned_numbers(t_dstr *s, va_list vl);
-char	*format_real_numbers(t_dstr *s, va_list vl);
+char	*format_unsigned_numbers(t_dstr *s, va_list vl, int base);
+char	*format_numbers(t_dstr *s, va_list vl, int base);
 
 //Modifications
 int		apply_modifications(char *str, t_dstr *output);
-void	apply_width_modification(char **str, t_dstr *output);
-void	apply_forced_sign_modification(char **str, t_dstr *output);
-void	apply_space_modification(char **str, t_dstr *output);
+char	*apply_width_modification(char *str, t_dstr *output);
+char	*apply_sign_modification(char *str, t_dstr *output);
 
 #endif

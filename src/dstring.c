@@ -6,7 +6,7 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 15:46:38 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/03/23 02:24:41 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/24 11:00:15 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	reset_dstr_flags_and_mods(t_dstr *dstr)
 {
 	free(dstr->length);
 	dstr->length = ft_strnew(2);
-	dstr->binary_prefix = 0;
+	dstr->hex_prefix = 0;
 	dstr->size = 0;
 	dstr->width = 0;
 	dstr->precision = 0;

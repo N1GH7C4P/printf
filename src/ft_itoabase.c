@@ -6,7 +6,7 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 02:21:17 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/03/23 22:31:38 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/26 13:35:59 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ char	*ft_itoabase(long long value, int base)
 	int		digits;
 	int		minus_sign;
 
+	if (value == INT64_MIN)
+		return (ft_strdup("-9223372036854775808"));
 	minus_sign = 0;
 	if (base < 2 || base > 16)
 		return (0);

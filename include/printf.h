@@ -6,9 +6,12 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 16:02:10 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/03/25 23:49:04 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/26 13:35:37 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#undef INT64_MIN
+#define INT64_MIN (-9223372036854775807LL -1)
 
 #ifndef PRINTF_H
 # define PRINTF_H

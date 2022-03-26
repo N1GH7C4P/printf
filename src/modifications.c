@@ -6,7 +6,7 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:06:08 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/03/25 23:17:26 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/26 13:44:10 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*place_sign(char *str, t_dstr *output, int index)
 	char	*temp;
 	int		len;
 
-	if (index == 0 && str[0] > '0' && str[0] < '9')
+	if (index == 0 && str[0] > '0' && str[0] <= '9')
 	{
 		temp = ft_strdup(str);
 		len = ft_strlen(str);

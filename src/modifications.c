@@ -6,92 +6,119 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:06:08 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/03/26 13:44:10 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/04/01 01:31:43 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/printf.h"
 #include "../include/libft.h"
 
-char	*place_sign(char *str, t_dstr *output, int index)
+char	*place_sign(char *r, t_dstr *s, int i)
 {
 	char	*temp;
-	int		len;
+	size_t	len;
 
-	if (index == 0 && str[0] > '0' && str[0] <= '9')
+	if (i == 0 && ((r[0] > '0' && r[0] <= '9') || (r[0] == '0' && !s->z_pad)))
 	{
-		temp = ft_strdup(str);
-		len = ft_strlen(str);
-		str = ft_strnew(len + 1);
-		ft_memcpy(str + 1, temp, len);
+		temp = ft_strdup(r);
+		len = ft_strlen(r);
+		if (len < s->width)
+			len--;
+		r = ft_strnew(len);
+		ft_memcpy(r + 1, temp, len);
+		free(temp);
 	}
-	if (output->is_negative)
-		str[index] = '-';
-	else if (output->force_sign)
-		str[index] = '+';
-	else if (output->space)
-		str[index] = ' ';
-	return (str);
+	if (!r[i + 1])
+		r[i + 1] = '0';
+	if (s->is_negative)
+		r[i] = '-';
+	else if (s->force_sign)
+		r[i] = '+';
+	else if (s->space)
+		r[i] = ' ';
+	return (r);
 }
 
-int	apply_modifications(char *str, t_dstr *output)
+void	apply_modifications(char *str, t_dstr *s)
 {
 	if (str[0] == '-')
 	{
-		output->is_negative = 1;
+		s->is_negative = 1;
 		str = ft_strdup(str + 1);
+		s->digits--;
 	}
-	if (output->width < output->digits)
-		output->width = output->digits;
-	if (output->width < output->precision)
-		output->width = output->precision;
-	if (output->digits < output->width)
-		output->padding = 1;
-	str = apply_width_modification(str, output);
-	str = apply_sign_modification(str, output);
-	output = dstrcat(output, str);
-	return (ft_strlen(str));
+	if (s->width < s->digits)
+		s->width = s->digits;
+	if (s->width < s->precision && s->digits && !(s->null))
+		s->width = s->precision;
+	if (s->digits < s->width)
+		s->padding = 1;
+	str = apply_width_modification(str, s);
+	str = apply_sign_modification(str, s);
+	if (s->c == 'X')
+		str = ft_str_toupper(str);
+	print_style_modifiers(s);
+	if (s->null && s->width < 2)
+		counting_putchar(str[0], s);
+	else
+		counting_putstr(str, s);
 }
 
-char	*add_spaces_and_zeroes(t_dstr *output)
+char	*add_prefix(t_dstr *s, char *str)
+{
+	int is_zero;
+	int	i;
+
+	is_zero = 1;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i++] != '0')
+			is_zero = 0;
+	}
+	if ((s->c == 'p' || s->c == 'x' || s->c == 'X') && s->prefix && !is_zero)
+	{
+		str = ft_strjoin("0x", str);
+		s->digits += 2;
+	}
+	return (str);
+}
+
+char	*add_spaces_and_zeroes(t_dstr *s, char *str)
 {
 	char	*ret;
-	int		precision;
 	int		width;
 
-	width = output->width;
-	precision = output->precision;
-	ret = ft_strnew(output->width);
-	if (output->zero_padding && !output->left_justify)
+	width = s->width;
+	ret = ft_strnew(s->width);
+	if (!s->left && (s->z_pad) && str[0] != '0' && !s->null)
 	{
-		if (output->padding && !output->zero_precision)
-		{	
-			while (precision)
-			{
+		if (s->padding && !s->z_prec)
+		{
+			while (width)
 				ret[--width] = '0';
-				precision--;
-			}
 		}
 	}
-	while (width > 0)
+	while (width)
 		ret[--width] = ' ';
 	return (ret);
 }
 
-char	*apply_width_modification(char *str, t_dstr *output)
+char	*apply_width_modification(char *str, t_dstr *s)
 {
 	char	*ret;
 	int		diff;
 
-	if (output->padding)
+	str = add_prefix(s, str);
+	if (s->padding)
 	{
-		ret = add_spaces_and_zeroes(output);
-		if (output->left_justify)
-			ft_memcpy(ret, str, output->digits);
+		ret = add_spaces_and_zeroes(s, str);
+		if (s->left)
+			ft_memcpy(ret, str, s->digits);
 		else
 		{
-			diff = output->width - output->digits;
-			ft_memcpy(ret + diff, str, output->digits);
+			diff = s->width - s->digits;
+			ft_memcpy(ret + diff, str, s->digits);
 		}
 		str = ft_strdup(ret);
 		free(ret);
@@ -99,21 +126,23 @@ char	*apply_width_modification(char *str, t_dstr *output)
 	return (str);
 }
 
-char	*apply_sign_modification(char *str, t_dstr *output)
+char	*apply_sign_modification(char *str, t_dstr *s)
 {
 	char	*temp;
 	int		i;
 
 	i = 0;
-	if (output->space || output->force_sign || output->is_negative)
+	if ((s->space || s->force_sign || s->is_negative) && s->c != 'u')
 	{
 		while (str[i + 1] == ' ')
 			i++;
 		temp = ft_strdup(str);
-		str = ft_strnew(output->width + 1);
-		ft_memcpy(str, temp, output->width + 1);
-		str = place_sign(str, output, i);
+		str = ft_strnew(s->width + 1);
+		ft_memcpy(str, temp, s->width + 1);
+		str = place_sign(str, s, i);
 		free(temp);
 	}
+	if (s->left && str[ft_strlen(str) - 1] == ' ' && ft_strlen(str) > s->width)
+		str[ft_strlen(str) - 1] = 0;
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 15:31:42 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/03/25 23:53:39 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/03/31 23:40:39 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char	*ft_ftoa(long double n, size_t precision)
 	int			minus_sign;
 
 	minus_sign = 0;
-	if (n < 0)
+	if (n < 0 || 1 / n < 0)
 	{
 		minus_sign = 1;
 		n = -n;

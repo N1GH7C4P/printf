@@ -6,45 +6,44 @@
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 16:02:10 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/03/26 13:35:37 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/04/01 01:26:54 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#undef INT64_MIN
-#define INT64_MIN (-9223372036854775807LL -1)
-
 #ifndef PRINTF_H
 # define PRINTF_H
-# define BUFF_SIZE 100
+# define BOOL char
 # include <stdarg.h>
 # include <unistd.h>
 
-// Dynamic Strings
+// Megastruct
 
 typedef struct s_dstr
 {
+	char	c;
+	char	color_code;
 	char	*content;
 	char	*length;
 	size_t	size;
 	size_t	width;
 	size_t	precision;
 	size_t	digits;
-	int		hex_prefix;
-	int		zero_padding;
-	int		space;
-	int		left_justify;
-	int		force_sign;
-	int		is_negative;
-	int		padding;
-	int		dot;
-	int		zero_precision;
+	size_t	count;
+	BOOL	prefix;
+	BOOL	z_pad;
+	BOOL	space;
+	BOOL	left;
+	BOOL	force_sign;
+	BOOL	is_negative;
+	BOOL	padding;
+	BOOL	dot;
+	BOOL	z_prec;
+	BOOL	null;
 }	t_dstr;
 
-//Totally unintentional megastruct
-t_dstr	*dstrnew(char *src);
-t_dstr	*dstrcat(t_dstr *dst, char *src);
-t_dstr	*dstrncat(t_dstr *dst, char *src, size_t n);
-void	reset_dstr_flags_and_mods(t_dstr *dstr);
+// megastruct functions
+t_dstr	*dstrnew(void);
+void	reset_all_but_count(t_dstr *s);
 void	dstrdel(t_dstr *s);
 
 // numbers to str conversion
@@ -59,24 +58,57 @@ int		ft_printf(char *str, ...);
 int		find_dot(char *str);
 int		check_f_digits(char *str);
 int		count_fdigits(long double f, int max_precision);
+int		counting_putstr(char *str, t_dstr *s);
+int		counting_putchar(char c, t_dstr *s);
 
 // handlers
 int		handle_length(t_dstr *output, char *input);
 int		handle_flags(t_dstr *output, char *input);
 int		handle_width(t_dstr *output, char *input);
-int		handle_conversion(t_dstr *output, va_list vl, char c);
 int		handle_precision(t_dstr *output, char *input);
+int		handle_style(t_dstr *output, char *input);
+void	handle_conversion(t_dstr *output, va_list vl, char c, char *str);
 
 // formatting
-char	*format_floats(t_dstr *s, va_list vl);
-char	*format_hexadecimal_numbers(char c, t_dstr *s, va_list vl);
+char	*format_char(va_list vl, t_dstr *s);
 char	*format_str(t_dstr *s, va_list vl);
+char	*format_floats(t_dstr *s, va_list vl);
+char	*format_hexadecimal_numbers(t_dstr *s, va_list vl);
+char	*format_octal_numbers(t_dstr *s, va_list vl);
+char	*format_binary_numbers(t_dstr *s, va_list vl);
 char	*format_unsigned_numbers(t_dstr *s, va_list vl, int base);
 char	*format_numbers(t_dstr *s, va_list vl, int base);
+char	*format_pointers(t_dstr *s, va_list vl);
+char	*format_number_metadata(t_dstr *s, char *str, char *temp, int diff);
 
-//Modifications
-int		apply_modifications(char *str, t_dstr *output);
+// Modifications
+void	apply_modifications(char *str, t_dstr *output);
 char	*apply_width_modification(char *str, t_dstr *output);
 char	*apply_sign_modification(char *str, t_dstr *output);
+
+// style
+
+void	print_style_modifiers(t_dstr *output);
+
+// color codes
+
+// regular text
+# define BLK "\e[0;30m"
+# define RED "\e[0;31m"
+# define GRN "\e[0;32m"
+# define YEL "\e[0;33m"
+# define BLU "\e[0;34m"
+# define WHT "\e[0;37m"
+
+// bold text
+# define BBLK "\e[1;30m"
+# define BRED "\e[1;31m"
+# define BGRN "\e[1;32m"
+# define BYEL "\e[1;33m"
+# define BBLU "\e[1;34m"
+# define BWHT "\e[1;37m"
+
+// reset
+# define STYLE_RESET "\e[0m"
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:14:47 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/03/31 23:36:38 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/08/19 17:26:02 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@
 
 int	counting_putchar(char c, t_dstr *s)
 {
-	if (s->null)
-		ft_putchar(0);
-	else
-		ft_putchar(c);
+	ft_putchar(c);
 	s->count++;
 	return (1);
 }

@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC = clang
+CC = gcc
 NAME = libft.a
 
 
@@ -32,7 +32,7 @@ SRC = $(patsubst %, %.c, $(FUNCS))
 
 .PHONY: clean fclean re all
  
-HEADER = ./libft.h
+HEADER = ./libft
 
 all: $(NAME)
 

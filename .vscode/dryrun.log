@@ -1,0 +1,11 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/home/desktop/projects/printf'
+gcc -Wall -Werror -Wextra -O3 -fPIE   -c -o src/modifications.o src/modifications.c
+gcc -Wall -Werror -Wextra -O3 -fPIE   -c -o src/modify_integers.o src/modify_integers.c
+make -C libft
+cp libft/libft.a .
+mv libft.a libftprintf.a
+ar rcs libftprintf.a src/dstring.o src/formatting_a.o src/formatting_b.o src/ft_ftoa.o src/ft_itoabase.o src/handlers.o src/modifications.o src/printf.o src/ft_ftoa_helpers.o src/modify_integers.o
+echo "\033[0;92mft_printf compiled!\033[0;39m"
+make: Leaving directory '/home/desktop/projects/printf'
+ 

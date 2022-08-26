@@ -79,12 +79,16 @@ char	*format_binary_numbers(t_dstr *s, va_list vl);
 char	*format_unsigned_numbers(t_dstr *s, va_list vl, int base);
 char	*format_numbers(t_dstr *s, va_list vl, int base);
 char	*format_pointers(t_dstr *s, va_list vl);
-char	*format_number_metadata(t_dstr *s, char *str, char *temp, int diff);
 
 // Modifications
 void	apply_modifications(char *str, t_dstr *output);
-char	*apply_width_modification(char *str, t_dstr *output);
-char	*apply_sign_modification(char *str, t_dstr *output);
+
+void	modify_integers(char *input, t_dstr *options);
+void	place_sign(t_dstr *options);
+void	copy_numbers(t_dstr *options, char *numbers);
+void	fill_with_padding(t_dstr *options);
+void	calculate_output_width(t_dstr *options);
+void	observe_minus_sign(t_dstr *options, char *input);
 
 // style
 

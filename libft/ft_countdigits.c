@@ -15,11 +15,6 @@ int	ft_countdigits(unsigned long long nb, int base)
 	int	count;
 
 	count = 0;
-	if (nb < 0)
-	{
-		count++;
-		nb = -nb;
-	}
 	while (nb > 0)
 	{
 		nb = nb / base;

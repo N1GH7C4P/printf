@@ -13,16 +13,16 @@
 #include "../include/printf.h"
 #include "../include/libft.h"
 
-int	handle_width(t_dstr *output, char *input)
+int	handle_width(t_dstr *options, char *input)
 {
 	int	i;
 
-	output->width = ft_atoi(input);
-	i = ft_countdigits(output->width, 10);
+	options->width = ft_atoi(input);
+	i = ft_countdigits(options->width, 10);
 	return (i);
 }
 
-int	handle_flags(t_dstr *output, char *input)
+int	handle_flags(t_dstr *options, char *input)
 {
 	int	i;
 
@@ -30,15 +30,15 @@ int	handle_flags(t_dstr *output, char *input)
 	while (i < 5)
 	{
 		if (input[i] == '#')
-			output->prefix = 1;
+			options->prefix = 1;
 		else if (input[i] == '0')
-			output->z_pad = 1;
+			options->z_pad = 1;
 		else if (input[i] == '-')
-			output->left = 1;
+			options->left = 1;
 		else if (input[i] == '+')
-			output->force_sign = 1;
+			options->force_sign = 1;
 		else if (input[i] == ' ')
-			output->space = 1;
+			options->space = 1;
 		else
 			break ;
 		i++;
@@ -46,73 +46,73 @@ int	handle_flags(t_dstr *output, char *input)
 	return (i);
 }
 
-int	handle_length(t_dstr *output, char *input)
+int	handle_length(t_dstr *options, char *input)
 {
 	int	i;
 
 	i = 0;
 	if (input[i] == 'l' || input[i] == 'h')
 	{
-		output->length[i] = input[i];
+		options->length[i] = input[i];
 		i++;
 		if (input[i] == input[i - 1])
 		{
-			output->length[i] = input[i];
+			options->length[i] = input[i];
 			i++;
 		}
 	}
 	else if (input[i] == 'L')
 	{
-		output->length[i] = 'L';
+		options->length[i] = 'L';
 		i++;
 	}
 	return (i);
 }
 
-int	handle_precision(t_dstr *output, char *input)
+int	handle_precision(t_dstr *options, char *input)
 {
 	int	i;
 
 	i = 1;
-	output->dot = 1;
+	options->dot = 1;
 	while (input[i] == '0')
 		i++;
 	if (input[i] > '0' && input[i] <= '9')
 	{
-		output->precision = ft_atoi(input + i);
-		i += ft_countdigits(output->precision, 10);
+		options->precision = ft_atoi(input + i);
+		i += ft_countdigits(options->precision, 10);
 		return (i);
 	}
 	else
 	{
-		output->precision = 0;
-		output->z_prec = 1;
+		options->precision = 0;
+		options->z_prec = 1;
 	}
 	return (i);
 }
 
-void	handle_conversion(t_dstr *output, va_list vl, char c, char *str)
+void	handle_conversion(t_dstr *options, va_list vl, char c, char *str)
 {	
-	output->c = c;
+	options->c = c;
 	if (c == 'c')
-		str = format_char(vl, output);
+		str = format_char(vl, options);
 	else if (c == 'u')
-		str = format_unsigned_numbers(output, vl, 10);
+		str = format_unsigned_numbers(options, vl, 10);
 	else if (c == 'd' || c == 'i')
-		str = format_numbers(output, vl, 10);
+		str = format_numbers(options, vl, 10);
 	else if (c == 's')
-		str = format_str(output, vl);
+		str = format_str(options, vl);
 	else if (c == 'p')
-		str = format_pointers(output, vl);
+		str = format_pointers(options, vl);
 	else if (c == 'X' || c == 'x')
-		str = format_hexadecimal_numbers(output, vl);
+		str = format_hexadecimal_numbers(options, vl);
 	else if (c == 'o')
-		str = format_octal_numbers(output, vl);
+		str = format_octal_numbers(options, vl);
 	else if (c == 'b')
-		str = format_binary_numbers(output, vl);
+		str = format_binary_numbers(options, vl);
 	else if (c == 'f')
-		str = format_floats(output, vl);
+		str = format_floats(options, vl);
 	if (!str)
 		str = ft_strdup("(null)");
-	apply_modifications(str, output);
+	apply_modifications(str, options);
 }

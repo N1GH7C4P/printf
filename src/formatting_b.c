@@ -13,34 +13,6 @@
 #include "../include/printf.h"
 #include "../include/libft.h"
 
-char	*format_number_metadata(t_dstr *s, char *str, char *temp, int diff)
-{
-	s->digits = ft_strlen(str);
-	if (str[0] == '-')
-		s->is_negative = 1;
-	if (s->z_prec)
-		if (!ft_strcmp(str, "0"))
-			str = ft_strnew(0);
-	if (s->digits < s->precision)
-	{
-		temp = ft_strnew(s->precision);
-		diff = s->precision - s->digits;
-		if (str[0] == '-')
-		{
-			str++;
-			diff++;
-		}
-		ft_memset(temp, '0', s->precision);
-		ft_memcpy(temp + diff, str, s->digits);
-		str = ft_strdup(temp);
-		free(temp);
-	}
-	s->digits = ft_strlen(str);
-	if ((s->digits < s->width) && str[0])
-		s->padding = 1;
-	return (str);
-}
-
 char	*format_unsigned_numbers(t_dstr *s, va_list vl, int base)
 {
 	char	*str;
@@ -55,7 +27,6 @@ char	*format_unsigned_numbers(t_dstr *s, va_list vl, int base)
 		str = ft_unsigned_itoabase(va_arg(vl, unsigned long), base);
 	else
 		str = ft_unsigned_itoabase(va_arg(vl, unsigned int), base);
-	str = format_number_metadata(s, str, NULL, 0);
 	return (str);
 }
 
@@ -74,7 +45,6 @@ char	*format_numbers(t_dstr *s, va_list vl, int base)
 	else
 		str = ft_itoabase(va_arg(vl, int), base);
 	s->digits = ft_strlen(str);
-	str = format_number_metadata(s, str, NULL, 0);
 	return (str);
 }
 
@@ -114,7 +84,7 @@ char	*format_octal_numbers(t_dstr *s, va_list vl)
 		ft_memcpy(str + (s->precision - len), temp, len);
 		free(temp);
 	}
-	str = format_number_metadata(s, str, NULL, 0);
+
 	s->digits = ft_strlen(str);
 	return (str);
 }

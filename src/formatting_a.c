@@ -36,7 +36,6 @@ char	*format_floats(t_dstr *s, va_list vl)
 	else
 		str = ft_ftoa((double)va_arg(vl, double), s->precision);
 	s->digits = ft_strlen(str);
-	str = format_number_metadata(s, str, NULL, 0);
 	if (!ft_strcmp("", str))
 		str = ft_strdup("0");
 	return (str);

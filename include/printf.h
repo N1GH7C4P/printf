@@ -45,6 +45,7 @@ typedef struct s_dstr
 t_dstr	*dstrnew(void);
 void	reset_all_but_count(t_dstr *s);
 void	dstrdel(t_dstr *s);
+void	print_info(t_dstr *dstr);
 
 // numbers to str conversion
 char	*ft_itoabase(long long value, int base);
@@ -84,7 +85,7 @@ char	*format_pointers(t_dstr *s, va_list vl);
 void	apply_modifications(char *str, t_dstr *output);
 
 void	modify_integers(char *input, t_dstr *options);
-void	place_sign(t_dstr *options);
+void	handle_sign(t_dstr *options);
 void	copy_numbers(t_dstr *options, char *numbers);
 void	fill_with_padding(t_dstr *options);
 void	calculate_output_width(t_dstr *options);

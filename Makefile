@@ -60,7 +60,7 @@ norm:
 			@norminette $(SRC) $(INCLUDE) $(LIBFT) | grep -v Norme -B1 || true
 
 test:		re
-			${CC} ${TEST} -L . -l ${PRINTFLIB} -o ${TEST_EXE}
+			${CC} ${TEST} -L . -l ${PRINTFLIB} -o ${TEST_EXE} -fsanitize=address -g
 			./${TEST_EXE}
 			
 .PHONY:		all clean fclean re norm

@@ -17,5 +17,6 @@ void	apply_modifications(char *input, t_dstr *options)
 {
 	if (options -> c == 'i' || options -> c == 'd')
 		modify_integers(input, options);
+	free(input);
 }
 

@@ -44,7 +44,6 @@ char	*format_numbers(t_dstr *s, va_list vl, int base)
 		str = ft_itoabase(va_arg(vl, long), base);
 	else
 		str = ft_itoabase(va_arg(vl, int), base);
-	s->digits = ft_strlen(str);
 	return (str);
 }
 
@@ -64,7 +63,6 @@ char	*format_hexadecimal_numbers(t_dstr *s, va_list vl)
 		ft_memcpy(str + (s->precision - len), temp, len);
 		free(temp);
 	}
-	s->digits = ft_strlen(str);
 	return (str);
 }
 

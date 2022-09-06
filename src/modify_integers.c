@@ -13,37 +13,29 @@
 #include "../include/printf.h"
 #include "../include/libft.h"
 
-void	modify_integers(char *input, t_dstr *options)
-{
-	observe_minus_sign(options, input);
-	calculate_output_width(options);
-	options->content = ft_strnew(options->width);
-	fill_with_padding(options);
-	copy_numbers(options, input);
-	place_sign(options);
-	counting_putstr(options->content, options);
-	free(input);
-}
-
-void observe_minus_sign(t_dstr *options, char *str)
+void	observe_minus_sign(t_dstr *options, char *str)
 {
 	if (str[0] == '-')
 		options->is_negative = 1;
 }
 
-void calculate_output_width(t_dstr *options)
+void	calculate_output_width(t_dstr *options)
 {
 	if (options->width < options->digits)
 		options->width = options->digits;
-	if (options->width < options->precision && options->digits && !(options->null))
+	if (options->width < options->precision)
+	{
+		if(options->is_negative || options->force_sign || options->space)
+			options->precision++;
 		options->width = options->precision;
+	}
 	if (options->digits < options->width)
-		options->padding = 1;
+		options->padding = options->width - options->digits;
 }
 
 void	fill_with_padding(t_dstr *options)
 {
-	if ((options->z_pad && options->left) || options->digits < options->precision)
+	if (options->z_pad && options->padding && !options->dot)
 		ft_memset(options->content, '0', options->width);
 	else
 		ft_memset(options->content, ' ', options->width);
@@ -51,33 +43,97 @@ void	fill_with_padding(t_dstr *options)
 
 void	copy_numbers(t_dstr *options, char *numbers)
 {
-	int diff;
-    int sign;
+	int skip_minus_sign;
+	int sign;
 
-    if (options->force_sign && !options->is_negative)
-        sign = 1;
-    else
-        sign = 0;
+	sign = 0;
+	skip_minus_sign = 0;
+	if ((options->is_negative || options->force_sign || options->space) && !options->z_prec)
+		sign = 1;
+	if (numbers[0] == '-')
+		skip_minus_sign = 1;
 	if (options->left)
-			ft_memcpy(options->content + sign, numbers, options->digits);
+		ft_memcpy(options->content + sign, numbers + skip_minus_sign, options->digits);
+	else if (options->padding)
+		ft_memcpy(options->content + options->padding, numbers + skip_minus_sign, options->digits);
 	else
-	{
-		diff = options->width - options->digits;
-		ft_memcpy(options->content + diff, numbers, options->digits);
-	}
+		ft_memcpy(options->content + options->padding + sign, numbers + skip_minus_sign, options->digits);
 }
 
-void	place_sign(t_dstr *options)
+
+size_t	count_digits(char *str)
+{
+	int		i;
+	size_t	count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+			count++;
+		i++;
+	}
+	return count;
+}
+
+
+void	place_sign(t_dstr *options, int location)
+{
+	if (options->is_negative)
+		options->content[location] = '-';
+	else if (options->force_sign)
+			options->content[location] = '+';
+	else if (options->space)
+		options->content[location] = ' ';
+}
+
+
+void	handle_sign(t_dstr *options)
 {
 	int i;
 
 	i = 0;
-	if (options->is_negative)
-		return;
-	while(options->content[++i] == ' ')
-	{}	
-	if (options->force_sign)
-		options->content[i] = '+';
-	else if (options->space)
-		options->content[i] = ' ';
+	if (options->z_pad)
+		place_sign(options, 0);
+	else
+	{
+		while(options->content[i] == ' ')
+			i++;
+		if (i == 0)
+			place_sign(options, 0);
+		else
+			place_sign(options, i - 1);
+	}
+}
+
+void	add_precision_zeroes(t_dstr *options)
+{
+	int diff;
+	int padd;
+
+	diff = options->precision - options->digits;
+	padd = options->width - options->digits - 1;
+	while (diff > 0)
+	{
+		options->content[padd--] = '0';
+		diff--;
+	}
+}
+
+void	modify_integers(char *input, t_dstr *options)
+{
+	options->digits = count_digits(input);
+	observe_minus_sign(options, input);
+	calculate_output_width(options);
+	options->content = ft_strnew(options->width);
+	if(options->dot)
+		options->z_pad = 0;
+	fill_with_padding(options);
+	if (options->dot)
+		add_precision_zeroes(options);
+	copy_numbers(options, input);
+	handle_sign(options);
+	counting_putstr(options->content, options);
+	free(options->content);
 }

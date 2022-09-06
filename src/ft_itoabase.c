@@ -18,12 +18,14 @@ static char	*convert_to_ascii(long long value, int base, int digits, int sign)
 	char	*output;
 	int		i;
 
-	output = (char *)malloc(sizeof(char) * (digits + 1));
 	if (sign)
 	{
 		digits++;
+		output = (char *)malloc(sizeof(char) * (digits + 1));
 		output[0] = '-';
 	}
+	else
+		output = (char *)malloc(sizeof(char) * (digits + 1));
 	i = 1;
 	while (value != 0)
 	{
@@ -53,7 +55,7 @@ char	*ft_itoabase(long long value, int base)
 		minus_sign = 1;
 	}
 	if (value == 0)
-		return ("0");
+		return (ft_strdup("0"));
 	digits = ft_countdigits((long long)value, base);
 	return (convert_to_ascii(value, base, digits, minus_sign));
 }

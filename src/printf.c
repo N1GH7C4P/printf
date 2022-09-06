@@ -24,17 +24,13 @@ int	counting_putchar(char c, t_dstr *s)
 
 int	counting_putstr(char *str, t_dstr *s)
 {
-	int	len;
-
-	len = ft_strlen(str);
-	if (s->null && s->c != 'p')
-		if (s->left)
-			counting_putchar(0, s);
-	ft_putstr(str);
-	if (s->null && s->c != 'p')
-		if (!s->left)
-			counting_putchar(0, s);
-	s->count += len;
+	if (s->null)
+		s->count++;
+	else
+	{
+		ft_putstr(str);
+		s->count += ft_strlen(str);
+	}	
 	return (1);
 }
 
@@ -81,7 +77,9 @@ int	ft_printf(char *str, ...)
 	va_list	vl;
 	int		i;
 	t_dstr	*output;
+	int 	count;
 
+	count = 0;
 	output = dstrnew();
 	i = 0;
 	va_start(vl, str);
@@ -89,5 +87,7 @@ int	ft_printf(char *str, ...)
 	if (output->color_code)
 		ft_putstr(STYLE_RESET);
 	va_end (vl);
-	return (output->count);
+	count = output->count;
+	dstrdel(output);
+	return (count);
 }

@@ -41,13 +41,17 @@ char	*add_zeroes(char *str, int precision)
 
 char	*round_number(int precision, int last_digit, char *str)
 {
+	char 	*temp;
+
 	if (!precision)
 	{
 		if (str[0] >= '5' && (check_f_digits(str + 1) || last_digit % 2))
 			return (ft_strdup("1"));
 		return (ft_strnew(0));
 	}
-	str = ft_strjoin(".", str);
+	temp = ft_strjoin(".", str);
+	str = ft_strdup(temp);
+	free(temp);
 	if (str[precision + 1] >= '5')
 	{
 		if (!check_f_digits(str + 2) && last_digit % 2)
@@ -82,12 +86,12 @@ static char	*combine(long double f_part, long long i_part, size_t precision)
 	char	*i_str;
 	char	*f_str;
 	char	*res;
-	int		last_i_digit;
+	char	*temp;
 
-	i_str = ft_itoabase(i_part, 10);
-	last_i_digit = i_str[ft_strlen(i_str) - 1] - '0';
 	f_part = to_whole_number(f_part, count_fdigits(f_part, precision + 1));
-	f_str = round_number(precision, last_i_digit, ft_itoabase(f_part, 10));
+	temp = ft_itoabase(f_part, 10);
+	f_str = round_number(precision, i_part % 10, temp);
+	free(temp);
 	if (f_str[0] == '1')
 	{
 		i_part++;
@@ -98,17 +102,20 @@ static char	*combine(long double f_part, long long i_part, size_t precision)
 			res = ft_strdup(i_str);
 	}
 	else
-		res = ft_strjoin(ft_itoabase(i_part, 10), f_str);
-	res = add_zeroes(res, precision);
+	{
+		i_str = ft_itoabase(i_part, 10);
+		res = ft_strjoin(i_str, f_str);
+	}
+	free(i_str);
+	free(f_str);
 	return (res);
 }
 
-char	*ft_ftoa(long double n, size_t precision)
+char	*ft_ftoa(long double n, size_t precision, long double f_part, long long	i_part)
 {
-	long double	f_part;
-	long long	i_part;
-	char		*res;
-	int			minus_sign;
+	char	*res;
+	int		minus_sign;
+	char	*temp;
 
 	minus_sign = 0;
 	if (n < 0 || 1 / n < 0)
@@ -118,9 +125,12 @@ char	*ft_ftoa(long double n, size_t precision)
 	}
 	i_part = (long long)n;
 	f_part = n - i_part;
+	temp = combine(f_part, i_part, precision);
 	if (minus_sign)
-		res = ft_strjoin("-", combine(f_part, i_part, precision));
+		res = ft_strjoin("-", temp);
 	else
-		res = combine(f_part, i_part, precision);
+		res = ft_strdup(temp);
+	free(temp);
+	res = add_zeroes(res, precision);
 	return (res);
 }

@@ -32,9 +32,9 @@ char	*format_floats(t_dstr *s, va_list vl)
 	if (!s->precision && !s->z_prec)
 		s->precision = 6;
 	if (s->length[0] == 'L')
-		str = ft_ftoa((long double)va_arg(vl, long double), s->precision);
+		str = ft_ftoa((long double)va_arg(vl, long double), s->precision, 0, 0);
 	else
-		str = ft_ftoa((double)va_arg(vl, double), s->precision);
+		str = ft_ftoa((double)va_arg(vl, double), s->precision, 0, 0);
 	s->digits = ft_strlen(str);
 	if (!ft_strcmp("", str))
 		str = ft_strdup("0");

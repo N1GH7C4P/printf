@@ -28,8 +28,8 @@ int	counting_putstr(char *str, t_dstr *s)
 		s->count++;
 	else
 	{
-		ft_putstr(str);
 		s->count += ft_strlen(str);
+		ft_putstr(s->content);
 	}	
 	return (1);
 }

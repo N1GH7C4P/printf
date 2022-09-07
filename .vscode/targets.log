@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'src/modify_pointers.o', needed by 'libftprintf.a'.  Stop.
+
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Sep  6 16:41:30 2022
+# Make data base, printed on Wed Sep  7 15:33:10 2022
 
 # Variables
 
@@ -24,9 +26,6 @@ SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 AR = ar rcs
 # environment
 GTK_RC_FILES = /etc/gtk/gtkrc:/home/kpolojar/.gtkrc:/home/kpolojar/.config/gtkrc
- 
-# environment
-KONSOLE_DBUS_SERVICE = :1.49
 # makefile (from 'Makefile', line 8)
 SRC_DIR = src/
 # environment
@@ -34,11 +33,7 @@ LC_NAME = en_US.UTF-8
 # environment
 LC_NUMERIC = en_FI.UTF-8
 # environment
-VSCODE_CWD = /home/kpolojar/Projects
-# environment
-WINDOWID = 58720263
-# environment
-LESS_TERMCAP_me = [0m
+VSCODE_CWD = /home/kpolojar
 # environment
 LC_ADDRESS = en_US.UTF-8
 # default
@@ -49,8 +44,6 @@ GTK3_MODULES = xapp-gtk3-module
 @D = $(patsubst %/,%,$(dir $@))
 # makefile (from 'Makefile', line 9)
 OBJ_DIR = src/
-# environment
-KONSOLE_VERSION = 220403
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -63,10 +56,6 @@ PWD = /home/kpolojar/Projects/printf
 MAIL = /var/spool/mail/kpolojar
 # environment
 XDG_DATA_DIRS = /home/kpolojar/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop
-# environment
-OLDPWD = /home/kpolojar
-# environment
-KONSOLE_DBUS_WINDOW = /Windows/1
 # makefile (from 'Makefile', line 30)
 TEST_FILES = *
 # automatic
@@ -87,18 +76,12 @@ XAUTHORITY = /home/kpolojar/.Xauthority
 .LOADED := 
 # makefile (from 'Makefile', line 11)
 TEST_EXE = run_test
-# environment
-LESS_TERMCAP_md = [01;32m
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
-# environment
-COLORFGBG = 15;0
 # makefile (from 'Makefile', line 26)
 CYAN = \033[0;96m
 # makefile
 MAKEFLAGS = pqrR
-# environment
-LESS_TERMCAP_so = [01;47;34m
 # makefile (from 'Makefile', line 24)
 BLUE = \033[0;94m
 # makefile
@@ -107,8 +90,6 @@ CURDIR := /home/kpolojar/Projects/printf
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
-# environment
-LESS_TERMCAP_ue = [0m
 # environment
 PAM_KWALLET5_LOGIN = /run/user/1000/kwallet5.socket
 # environment
@@ -122,8 +103,6 @@ XDG_CONFIG_DIRS = /home/kpolojar/.config/kdedefaults:/etc/xdg
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # environment
-P9K_SSH = 0
-# environment
 XCURSOR_THEME = breeze_cursors
 # environment
 XDG_SESSION_DESKTOP = KDE
@@ -132,13 +111,13 @@ MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 1202
+VSCODE_PID = 1261
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/gf63thin9sc:@/tmp/.ICE-unix/761,unix/gf63thin9sc:/tmp/.ICE-unix/761
+SESSION_MANAGER = local/gf63thin9sc:@/tmp/.ICE-unix/768,unix/gf63thin9sc:/tmp/.ICE-unix/768
 # automatic
 *F = $(notdir $*)
 # environment
@@ -148,8 +127,6 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # environment
-P9K_TTY = old
-# environment
 VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
 # makefile (from 'Makefile', line 6)
 INCLUDE = -I include
@@ -157,26 +134,18 @@ INCLUDE = -I include
 MAKE_HOST := x86_64-pc-linux-gnu
 # makefile
 SHELL = /bin/sh
-# environment
-LESS_TERMCAP_us = [01;36m
 # default
 MAKECMDGOALS := all
 # environment
-SHLVL = 2
-# environment
-PROFILEHOME = 
+SHLVL = 1
 # environment
 MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
 PATH = /home/kpolojar/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin:/snap/bin/
-# environment
-LESS_TERMCAP_se = [0m
 # default
 MAKEFILES := 
-# environment
-LANGUAGE = 
 # environment
 LC_MONETARY = en_FI.UTF-8
 # environment
@@ -187,8 +156,6 @@ MOTD_SHOWN = pam
 YELLOW = \033[0;93m
 # environment
 LC_TIME = en_FI.UTF-8
-# environment
-LESS_TERMCAP_mb = [01;32m
 # makefile (from 'Makefile', line 19)
 DEF_COLOR = \033[0;39m
 # makefile (from 'Makefile', line 20)
@@ -209,14 +176,10 @@ NAME = libftprintf.a
 XDG_SEAT = seat0
 # environment
 XDG_CURRENT_DESKTOP = KDE
-# environment
-LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:
 # automatic
 +F = $(notdir $+)
 # environment
 XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
-# environment
-LESS = -R
 # environment
 DESKTOP_SESSION = plasma
 # environment
@@ -228,12 +191,11 @@ GNUMAKEFLAGS :=
 # environment
 LOGNAME = kpolojar
 # environment
- 
 XDG_VTNR = 1
 # makefile
 .DEFAULT_GOAL := all
 # environment
-SYSTEMD_EXEC_PID = 643
+SYSTEMD_EXEC_PID = 651
 # makefile (from 'Makefile', line 14)
 RM = rm -f
 # makefile (from 'Makefile', line 21)
@@ -249,9 +211,7 @@ MAKE_VERSION := 4.3
 # environment
 KDE_SESSION_UID = 1000
 # makefile (from 'Makefile', line 29)
-SRC_FILES = dstring formatting_a formatting_b ft_ftoa ft_itoabase handlers modifications printf ft_ftoa_helpers modify_integers
-# environment
-KONSOLE_DBUS_SESSION = /Sessions/1
+SRC_FILES = dstring formatting_a formatting_b ft_ftoa ft_itoabase handlers modifications printf ft_ftoa_helpers modify_integers modify_floats modify_pointers
 # makefile (from 'Makefile', line 10)
 TEST_DIR = test/
 # environment
@@ -265,8 +225,6 @@ XDG_RUNTIME_DIR = /run/user/1000
 # makefile (from 'Makefile', line 13)
 CFLAGS = -Wall -Werror -Wextra -O3 -fPIE
 # environment
-COLORTERM = truecolor
-# environment
 XDG_SESSION_CLASS = user
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
@@ -278,8 +236,6 @@ HOME = /home/kpolojar
 ELECTRON_RUN_AS_NODE = 1
 # environment
 VSCODE_IPC_HOOK = /run/user/1000/vscode-c658c5d0-1.70.2-main.sock
-# environment
-TERM = xterm-256color
 # environment
 XDG_SESSION_ID = 1
 # environment
@@ -295,15 +251,9 @@ SUFFIXES :=
 # environment
 QT_AUTO_SCREEN_SCALE_FACTOR = 0
 # environment
-_P9K_TTY = /dev/pts/1
-# environment
 VSCODE_CLI = 1
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
-# environment
-LS_OPTIONS = --color=auto
-# environment
-SHELL_SESSION_ID = 1e86004a268d48ab9bd12a59f52f26ac
 # environment
 KDE_SESSION_VERSION = 5
 # default
@@ -315,16 +265,13 @@ KDE_FULL_SESSION = true
 # makefile (from 'Makefile', line 27)
 WHITE = \033[0;97m
 # environment
-PKGFILE_PROMPT_INSTALL_MISSING = 1
-# environment
 LC_IDENTIFICATION = en_US.UTF-8
 # variable set hash-table stats:
-# Load=153/1024=15%, Rehash=0, Collisions=23/188=12%
+# Load=127/1024=12%, Rehash=0, Collisions=9/162=6%
 
 # Pattern-specific Variable Values
 
 # No pattern-specific variable values.
- 
 
 # Directories
 
@@ -341,44 +288,58 @@ LC_IDENTIFICATION = en_US.UTF-8
 # Not a target:
 src/formatting_b.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-06 16:40:40.126127426
+#  Last modified 2022-09-07 15:28:48.737938652
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+ 
+src/modify_floats.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-07 15:28:49.097937973
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-06 16:40:36.04290552
+#  Last modified 2022-09-07 15:33:07.520787684
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/modifications.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-06 16:40:40.292789544
+#  Last modified 2022-09-07 15:28:48.904605004
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/ft_itoabase.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-06 16:40:40.222791455
+#  Last modified 2022-09-07 15:28:48.834605136
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/handlers.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-06 16:40:40.269456847
+#  Last modified 2022-09-07 15:28:48.881271715
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/dstring.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-06 16:40:39.989464489
+#  Last modified 2022-09-07 15:28:48.60460557
 #  File has been updated.
 #  Successfully updated.
+
+# Not a target:
+src/modify_pointers.o:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
 
 clean:
 #  Phony target (prerequisite of .PHONY).
@@ -393,7 +354,7 @@ clean:
 # Not a target:
 src/ft_ftoa.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-06 16:40:40.186125788
+#  Last modified 2022-09-07 15:28:48.791271885
 #  File has been updated.
 #  Successfully updated.
 
@@ -405,11 +366,10 @@ re: fclean all
 #  recipe to execute (from 'Makefile', line 57):
 			@echo "$(GREEN)Cleaned and rebuilt everything for ft_printf!$(DEF_COLOR)"
 
-libftprintf.a: src/dstring.o src/formatting_a.o src/formatting_b.o src/ft_ftoa.o src/ft_itoabase.o src/handlers.o src/modifications.o src/printf.o src/ft_ftoa_helpers.o src/modify_integers.o
+libftprintf.a: src/dstring.o src/formatting_a.o src/formatting_b.o src/ft_ftoa.o src/ft_itoabase.o src/handlers.o src/modifications.o src/printf.o src/ft_ftoa_helpers.o src/modify_integers.o src/modify_floats.o src/modify_pointers.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-09-06 16:40:41.816081301
-#  File has been updated.
-#  Successfully updated.
+#  Last modified 2022-09-07 15:28:50.46793539
+#  File has not been updated.
 #  recipe to execute (from 'Makefile', line 39):
 			@make -C $(LIBFT)
 			@cp libft/libft.a .
@@ -428,8 +388,7 @@ all: libftprintf.a
 #  Command line target.
 #  Implicit rule search has not been done.
 #  File does not exist.
-#  File has been updated.
-#  Successfully updated.
+#  File has not been updated.
 
 fclean: clean
 #  Phony target (prerequisite of .PHONY).
@@ -445,7 +404,7 @@ fclean: clean
 # Not a target:
 src/formatting_a.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-06 16:40:40.049462852
+#  Last modified 2022-09-07 15:28:48.657938802
 #  File has been updated.
 #  Successfully updated.
 
@@ -474,38 +433,38 @@ norm:
 # Not a target:
 src/modify_integers.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-06 16:40:40.462784904
+#  Last modified 2022-09-07 15:28:49.04460474
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/ft_ftoa_helpers.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-06 16:40:40.376120603
+#  Last modified 2022-09-07 15:28:48.98793818
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/printf.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-06 16:40:40.339454937
+#  Last modified 2022-09-07 15:28:48.947938256
 #  File has been updated.
 #  Successfully updated.
 
 # files hash-table stats:
-# Load=21/1024=2%, Rehash=0, Collisions=0/53=0%
+# Load=23/1024=2%, Rehash=0, Collisions=0/57=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 33 / storage = 350 B / avg = 10 B
-# current buf: size = 8162 B / used = 350 B / count = 33 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 35 / storage = 392 B / avg = 11 B
+# current buf: size = 8162 B / used = 392 B / count = 35 / avg = 11 B
 
-# strcache performance: lookups = 58 / hit rate = 43%
+# strcache performance: lookups = 60 / hit rate = 41%
 # hash-table stats:
-# Load=33/8192=0%, Rehash=0, Collisions=0/58=0%
-# Finished Make data base on Tue Sep  6 16:41:30 2022
+# Load=35/8192=0%, Rehash=0, Collisions=0/60=0%
+# Finished Make data base on Wed Sep  7 15:33:10 2022
 
  

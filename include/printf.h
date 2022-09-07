@@ -50,7 +50,7 @@ void	print_info(t_dstr *dstr);
 // numbers to str conversion
 char	*ft_itoabase(long long value, int base);
 char	*ft_unsigned_itoabase(unsigned long long value, int base);
-char	*ft_ftoa(long double n, size_t precision);
+char	*ft_ftoa(long double n, size_t precision, long double f_part, long long	i_part);
 
 // printf
 int		ft_printf(char *str, ...);
@@ -84,12 +84,17 @@ char	*format_pointers(t_dstr *s, va_list vl);
 // Modifications
 void	apply_modifications(char *str, t_dstr *output);
 
+void	modify_floats(char *input, t_dstr *options);
 void	modify_integers(char *input, t_dstr *options);
-void	handle_sign(t_dstr *options);
-void	copy_numbers(t_dstr *options, char *numbers);
-void	fill_with_padding(t_dstr *options);
-void	calculate_output_width(t_dstr *options);
-void	observe_minus_sign(t_dstr *options, char *input);
+void	modify_pointers(char *input, t_dstr *options);
+
+//void	handle_sign(t_dstr *options);
+//void	copy_numbers(t_dstr *options, char *numbers);
+//void	fill_with_padding(t_dstr *options);
+//void	calculate_output_width(t_dstr *options);
+//void	observe_minus_sign(t_dstr *options, char *input);
+//size_t	count_digits(char *str);
+//void	add_precision_zeroes(t_dstr *options);
 
 // style
 

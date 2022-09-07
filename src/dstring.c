@@ -38,6 +38,7 @@ void	reset_all_but_count(t_dstr *dstr)
 
 void	dstrdel(t_dstr *s)
 {
+	s->count = 0;
 	free(s->length);
 	free(s);
 }
@@ -65,6 +66,7 @@ t_dstr	*dstrnew(void)
 	dstr->color_code = 0;
 	dstr->c = 0;
 	dstr->null = 0;
+	dstr->count = 0;
 	return (dstr);
 }
 

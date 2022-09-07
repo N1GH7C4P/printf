@@ -21,16 +21,16 @@ static void	observe_minus_sign(t_dstr *options, char *str)
 
 static void	calculate_output_width(t_dstr *options)
 {
-	if (options->width < options->digits)
-		options->width = options->digits;
+	if (options->width <= options->digits)
+		options->width = options->digits + 2;
 	if (options->width < options->precision)
 	{
 		if(options->is_negative || options->force_sign || options->space)
 			options->precision++;
 		options->width = options->precision;
 	}
-	if (options->digits < options->width)
-		options->padding = options->width - options->digits;
+	if (options->digits < options->width - 2)
+		options->padding = options->width - options->digits - 2;
 }
 
 static void	fill_with_padding(t_dstr *options)
@@ -43,69 +43,40 @@ static void	fill_with_padding(t_dstr *options)
 
 static void	copy_numbers(t_dstr *options, char *numbers)
 {
-	int skip_minus_sign;
-	int sign;
-
-	sign = 0;
-	skip_minus_sign = 0;
-	if ((options->is_negative || options->force_sign || options->space) && !options->z_prec)
-		sign = 1;
-	if (numbers[0] == '-')
-		skip_minus_sign = 1;
 	if (options->left)
-		ft_memcpy(options->content + sign, numbers + skip_minus_sign, options->digits);
+		ft_memcpy(options->content + 2, numbers, options->digits);
 	else if (options->padding)
-		ft_memcpy(options->content + options->padding, numbers + skip_minus_sign, options->digits);
+		ft_memcpy(options->content + options->padding + 2, numbers, options->digits);
 	else
-		ft_memcpy(options->content + options->padding + sign, numbers + skip_minus_sign, options->digits);
+		ft_memcpy(options->content + options->padding + 2, numbers, options->digits);
 }
 
 
-static size_t	count_digits(char *str)
+static void	place_prefix(t_dstr *options, int location)
 {
-	int		i;
-	size_t	count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		if (str[i] >= '0' && str[i] <= '9')
-			count++;
-		i++;
-	}
-	return count;
+	options->content[location] = '0';
+    options->content[location + 1] = 'x';
 }
 
 
-static void	place_sign(t_dstr *options, int location)
-{
-	if (options->is_negative)
-		options->content[location] = '-';
-	else if (options->force_sign)
-			options->content[location] = '+';
-	else if (options->space)
-		options->content[location] = ' ';
-}
-
-
-static void	handle_sign(t_dstr *options)
+static void	handle_prefix(t_dstr *options)
 {
 	int i;
 
 	i = 0;
 	if (options->z_pad)
-		place_sign(options, 0);
+		place_prefix(options, 0);
 	else
 	{
 		while(options->content[i] == ' ')
 			i++;
 		if (i == 0)
-			place_sign(options, 0);
+			place_prefix(options, 0);
 		else
-			place_sign(options, i - 1);
+			place_prefix(options, i - 2);
 	}
 }
+
 
 static void	add_precision_zeroes(t_dstr *options)
 {
@@ -121,9 +92,9 @@ static void	add_precision_zeroes(t_dstr *options)
 	}
 }
 
-void	modify_integers(char *input, t_dstr *options)
+void	modify_pointers(char *input, t_dstr *options)
 {
-	options->digits = count_digits(input);
+	options->digits = ft_strlen(input);
 	observe_minus_sign(options, input);
 	calculate_output_width(options);
 	options->content = ft_strnew(options->width);
@@ -133,7 +104,7 @@ void	modify_integers(char *input, t_dstr *options)
 	if (options->dot)
 		add_precision_zeroes(options);
 	copy_numbers(options, input);
-	handle_sign(options);
+	handle_prefix(options);
 	counting_putstr(options->content, options);
 	free(options->content);
 }

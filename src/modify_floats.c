@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   modifications.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/12 14:06:08 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/04/01 01:31:43 by linuxlite        ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/printf.h"
 #include "../include/libft.h"
 
@@ -29,7 +17,9 @@ static void	calculate_output_width(t_dstr *options)
 			options->precision++;
 		options->width = options->precision;
 	}
-	if (options->digits < options->width)
+    else if (options->width == options->digits && (options->is_negative || options->force_sign || options->space))
+        options->width++;
+	else if (options->digits < options->width)
 		options->padding = options->width - options->digits;
 }
 
@@ -58,6 +48,7 @@ static void	copy_numbers(t_dstr *options, char *numbers)
 		ft_memcpy(options->content + options->padding, numbers + skip_minus_sign, options->digits);
 	else
 		ft_memcpy(options->content + options->padding + sign, numbers + skip_minus_sign, options->digits);
+    options->content[options->width] = '\0';
 }
 
 
@@ -70,6 +61,8 @@ static size_t	count_digits(char *str)
 	count = 0;
 	while (str[i])
 	{
+        if (str[i] == '.')
+            count++;
 		if (str[i] >= '0' && str[i] <= '9')
 			count++;
 		i++;
@@ -121,7 +114,7 @@ static void	add_precision_zeroes(t_dstr *options)
 	}
 }
 
-void	modify_integers(char *input, t_dstr *options)
+void	modify_floats(char *input, t_dstr *options)
 {
 	options->digits = count_digits(input);
 	observe_minus_sign(options, input);
@@ -134,6 +127,7 @@ void	modify_integers(char *input, t_dstr *options)
 		add_precision_zeroes(options);
 	copy_numbers(options, input);
 	handle_sign(options);
+    print_info(options);
 	counting_putstr(options->content, options);
 	free(options->content);
 }

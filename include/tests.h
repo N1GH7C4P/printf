@@ -17,4 +17,7 @@
     int test_floats();
     int test_integers();
     int test_pointers();
+    int test_hexadecimals();
+    int test_octals();
+    int test_strings();
 #endif

@@ -50,39 +50,45 @@ char	*format_numbers(t_dstr *s, va_list vl, int base)
 char	*format_hexadecimal_numbers(t_dstr *s, va_list vl)
 {
 	char	*str;
-	char	*temp;
+	char	*output;
 	size_t	len;
 
 	str = format_unsigned_numbers(s, vl, 16);
 	len = ft_strlen(str);
 	if (len < s->precision)
 	{
-		temp = str;
-		str = ft_strnew(s->precision);
-		ft_memset(str, '0', s->precision);
-		ft_memcpy(str + (s->precision - len), temp, len);
-		free(temp);
+		output = ft_strnew(s->precision);
+		ft_memset(output, '0', s->precision);
+		ft_memcpy(output + (s->precision - len), str, len);
 	}
-	return (str);
+	else
+		output = ft_strdup(str);
+	if (len == 1 && str[0] == '0')
+		s->is_zero = 1;
+	free(str);
+	return (output);
 }
 
 char	*format_octal_numbers(t_dstr *s, va_list vl)
 {
 	char	*str;
-	char	*temp;
+	char	*output;
 	size_t	len;
 
+	if(s->prefix)
+		s->prefix = 1;
 	str = format_unsigned_numbers(s, vl, 8);
 	len = ft_strlen(str);
 	if (len < s->precision)
 	{
-		temp = str;
-		str = ft_strnew(s->precision);
-		ft_memset(str, '0', s->precision);
-		ft_memcpy(str + (s->precision - len), temp, len);
-		free(temp);
+		output = ft_strnew(s->precision);
+		ft_memset(output, '0', s->precision);
+		ft_memcpy(output + (s->precision - len), str, len);
 	}
-
-	s->digits = ft_strlen(str);
-	return (str);
+	else
+		output = ft_strdup(str);
+	if (len == 1 && str[0] == '0')
+		s->is_zero = 1;
+	free(str);
+	return (output);
 }

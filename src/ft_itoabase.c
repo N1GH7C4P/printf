@@ -69,7 +69,7 @@ char	*ft_unsigned_itoabase(unsigned long long value, int base)
 	if (base < 2 || base > 16)
 		return (0);
 	if (value == 0)
-		return ("0");
+		return (ft_strdup("0"));
 	digits = ft_countdigits(value, base);
 	output = (char *)malloc(sizeof(char) * (digits + 1));
 	i = 1;

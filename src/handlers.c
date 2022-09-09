@@ -30,7 +30,7 @@ int	handle_flags(t_dstr *options, char *input)
 	while (i < 5)
 	{
 		if (input[i] == '#')
-			options->prefix = 1;
+			options->prefix = 2;
 		else if (input[i] == '0')
 			options->z_pad = 1;
 		else if (input[i] == '-')

@@ -21,6 +21,12 @@ void	apply_modifications(char *input, t_dstr *options)
 		modify_floats(input, options);
 	else if (options -> c == 'p')
 		modify_pointers(input, options);
+	else if (options -> c == 'x' || options -> c == 'X')
+		modify_hexadecimals(input, options);
+	else if (options -> c == 'o')
+		modify_octals(input, options);
+	else if (options -> c == 's' || options -> c == 'c')
+		modify_strings(input, options);
 	free(input);
 }
 

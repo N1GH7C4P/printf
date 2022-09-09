@@ -34,6 +34,7 @@ void	reset_all_but_count(t_dstr *dstr)
 	dstr->color_code = 0;
 	dstr->c = 0;
 	dstr->null = 0;
+	dstr->is_zero = 0;
 }
 
 void	dstrdel(t_dstr *s)
@@ -67,6 +68,7 @@ t_dstr	*dstrnew(void)
 	dstr->c = 0;
 	dstr->null = 0;
 	dstr->count = 0;
+	dstr->is_zero = 0;
 	return (dstr);
 }
 
@@ -132,6 +134,9 @@ void print_info(t_dstr *dstr)
 	ft_putchar(dstr->c);
 	ft_putstr(" is_nul: ");
 	ft_putnbr(dstr->null);
+	ft_putendl("");
+	ft_putstr("  is_0: ");
+	ft_putnbr(dstr->is_zero);
 	ft_putendl("");
 	if(dstr->content)
 	{

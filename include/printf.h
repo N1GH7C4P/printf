@@ -39,6 +39,7 @@ typedef struct s_dstr
 	BOOL	dot;
 	BOOL	z_prec;
 	BOOL	null;
+	BOOL	is_zero;
 }	t_dstr;
 
 // megastruct functions
@@ -87,6 +88,9 @@ void	apply_modifications(char *str, t_dstr *output);
 void	modify_floats(char *input, t_dstr *options);
 void	modify_integers(char *input, t_dstr *options);
 void	modify_pointers(char *input, t_dstr *options);
+void	modify_hexadecimals(char *input, t_dstr *options);
+void	modify_octals(char *input, t_dstr *options);
+void	modify_strings(char *input, t_dstr *options);
 
 //void	handle_sign(t_dstr *options);
 //void	copy_numbers(t_dstr *options, char *numbers);

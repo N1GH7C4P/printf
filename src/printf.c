@@ -24,12 +24,15 @@ int	counting_putchar(char c, t_dstr *s)
 
 int	counting_putstr(char *str, t_dstr *s)
 {
+	//print_info(s);
 	if (s->null)
-		s->count++;
+	{
+		counting_putchar('\0', s);
+	}
 	else
 	{
 		s->count += ft_strlen(str);
-		ft_putstr(s->content);
+		ft_putstr(str);
 	}	
 	return (1);
 }

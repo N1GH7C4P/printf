@@ -79,7 +79,7 @@ char	*format_pointers(t_dstr *s, va_list vl)
 	char	*str;
 	char	*temp;
 	size_t	len;
-	
+
 	s->prefix = 1;
 	str = ft_itoabase(va_arg(vl, unsigned long long), 16);
 	len = ft_strlen(str);

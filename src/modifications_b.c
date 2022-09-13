@@ -36,5 +36,5 @@ size_t	count_digits(char *str)
 			count++;
 		i++;
 	}
-	return count;
+	return (count);
 }

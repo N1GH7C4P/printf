@@ -98,7 +98,7 @@ void	print_style_modifiers(t_dstr *output)
 		ft_putstr(WHT);
 }
 
-void print_info(t_dstr *dstr)
+void	print_info(t_dstr *dstr)
 {
 	ft_putendl("#########################################");
 	ft_putstr("length: ");
@@ -142,7 +142,7 @@ void print_info(t_dstr *dstr)
 	ft_putstr(" lead0: ");
 	ft_putnbr(dstr->lead0);
 	ft_putendl("");
-	if(dstr->content)
+	if (dstr->content)
 	{
 		ft_putstr("content: ");
 		ft_putendl(dstr->content);

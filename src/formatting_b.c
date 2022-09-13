@@ -75,7 +75,7 @@ char	*format_octal_numbers(t_dstr *s, va_list vl)
 	char	*output;
 	size_t	len;
 
-	if(s->prefix)
+	if (s->prefix)
 		s->prefix = 1;
 	str = format_unsigned_numbers(s, vl, 8);
 	len = ft_strlen(str);

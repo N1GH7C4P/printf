@@ -24,7 +24,6 @@ int	counting_putchar(char c, t_dstr *s)
 
 int	counting_putstr(char *str, t_dstr *s)
 {
-	//print_info(s);
 	if (!s->z_prec && s->is_zero)
 	{
 		counting_putchar('0', s);
@@ -84,7 +83,7 @@ int	ft_printf(char *str, ...)
 	va_list	vl;
 	int		i;
 	t_dstr	*output;
-	int 	count;
+	int		count;
 
 	count = 0;
 	output = dstrnew();

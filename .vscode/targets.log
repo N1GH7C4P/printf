@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'src/modify_floats.o', needed by 'libftprintf.a'.  Stop.
-
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'src/modify_floats.o', needed by 'libftprintf.a
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue Sep 13 14:49:37 2022
+# Make data base, printed on Tue Sep 13 15:21:55 2022
 
 # Variables
 
@@ -171,7 +169,6 @@ MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
- 
 PATH = /home/kpolojar/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin:/snap/bin/
 # environment
 LESS_TERMCAP_se = [0m
@@ -256,7 +253,6 @@ KONSOLE_DBUS_SESSION = /Sessions/1
 # makefile (from 'Makefile', line 10)
 TEST_DIR = test/
 # environment
- 
 LC_MEASUREMENT = en_FI.UTF-8
 # environment
 _ = /usr/bin/make
@@ -290,6 +286,7 @@ XCURSOR_SIZE = 24
 .RECIPEPREFIX := 
 # automatic
 <F = $(notdir $<)
+ 
 # makefile (from 'Makefile', line 5)
 PRINTFLIB = ftprintf
 # default
@@ -329,9 +326,9 @@ LC_IDENTIFICATION = en_US.UTF-8
 
 # Directories
 
-# . (device 66306, inode 23199856): 12 files, no impossibilities.
+# . (device 66306, inode 23199856): 13 files, no impossibilities.
 
-# 12 files, no impossibilities in 1 directories.
+# 13 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -340,24 +337,25 @@ LC_IDENTIFICATION = en_US.UTF-8
 # Files
 
 # Not a target:
- 
 src/formatting_b.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-13 14:49:21.95191619
+#  Last modified 2022-09-13 14:52:46.111140834
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/modify_floats.o:
 #  Implicit rule search has been done.
-#  File does not exist.
-#  File has not been updated.
+#  Last modified 2022-09-13 14:52:46.434467911
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 src/modify_octals.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-09-13 14:52:46.527799439
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 Makefile:
@@ -369,37 +367,37 @@ Makefile:
 # Not a target:
 src/ft_itoabase.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-13 14:49:22.065247142
+#  Last modified 2022-09-13 14:52:46.197805824
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/modifications_a.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-13 14:49:22.181911358
+#  Last modified 2022-09-13 14:52:46.281137545
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/handlers.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-13 14:49:22.118579355
+#  Last modified 2022-09-13 14:52:46.23780505
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/dstring.o:
- 
 #  Implicit rule search has been done.
-#  Last modified 2022-09-13 14:49:21.841918501
+#  Last modified 2022-09-13 14:52:46.027809113
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/modify_pointers.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-09-13 14:52:46.464467331
+#  File has been updated.
+#  Successfully updated.
 
 clean:
 #  Phony target (prerequisite of .PHONY).
@@ -414,7 +412,7 @@ clean:
 # Not a target:
 src/ft_ftoa.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-13 14:49:22.018581455
+#  Last modified 2022-09-13 14:52:46.161139866
 #  File has been updated.
 #  Successfully updated.
 
@@ -429,15 +427,15 @@ re: fclean all
 # Not a target:
 src/modifications_b.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-13 14:49:22.215243992
- 
+#  Last modified 2022-09-13 14:52:46.307803695
 #  File has been updated.
 #  Successfully updated.
 
 libftprintf.a: src/dstring.o src/formatting_a.o src/formatting_b.o src/ft_ftoa.o src/ft_itoabase.o src/handlers.o src/modifications_a.o src/modifications_b.o src/printf.o src/ft_ftoa_helpers.o src/modify_integers.o src/modify_floats.o src/modify_pointers.o src/modify_hexadecimals.o src/modify_octals.o src/modify_strings.o
 #  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
+#  Last modified 2022-09-13 14:52:47.877773324
+#  File has been updated.
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 39):
 			@make -C $(LIBFT)
 			@cp libft/libft.a .
@@ -456,7 +454,8 @@ all: libftprintf.a
 #  Command line target.
 #  Implicit rule search has not been done.
 #  File does not exist.
-#  File has not been updated.
+#  File has been updated.
+#  Successfully updated.
 
 fclean: clean
 #  Phony target (prerequisite of .PHONY).
@@ -472,7 +471,7 @@ fclean: clean
 # Not a target:
 src/formatting_a.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-13 14:49:21.898583977
+#  Last modified 2022-09-13 14:52:46.067808339
 #  File has been updated.
 #  Successfully updated.
 
@@ -495,16 +494,17 @@ norm:
 
 # Not a target:
 src/modify_hexadecimals.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
- 
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-09-13 14:52:46.497800019
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 src/modify_strings.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-09-13 14:52:46.55446559
+#  File has been updated.
+#  Successfully updated.
 
 .PHONY: all clean fclean re norm
 #  Implicit rule search has not been done.
@@ -514,21 +514,21 @@ src/modify_strings.o:
 # Not a target:
 src/modify_integers.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-13 14:49:22.331908208
+#  Last modified 2022-09-13 14:52:46.404468492
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/ft_ftoa_helpers.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-13 14:49:22.291909048
+#  Last modified 2022-09-13 14:52:46.374469072
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/printf.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-13 14:49:22.261909679
+#  Last modified 2022-09-13 14:52:46.344469653
 #  File has been updated.
 #  Successfully updated.
 
@@ -543,9 +543,9 @@ src/printf.o:
 # strcache buffers: 1 (0) / strings = 39 / storage = 483 B / avg = 12 B
 # current buf: size = 8162 B / used = 483 B / count = 39 / avg = 12 B
 
-# strcache performance: lookups = 63 / hit rate = 38%
+# strcache performance: lookups = 64 / hit rate = 39%
 # hash-table stats:
-# Load=39/8192=0%, Rehash=0, Collisions=0/63=0%
-# Finished Make data base on Tue Sep 13 14:49:37 2022
+# Load=39/8192=0%, Rehash=0, Collisions=0/64=0%
+# Finished Make data base on Tue Sep 13 15:21:55 2022
 
  

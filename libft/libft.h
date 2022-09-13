@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 17:53:36 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/01/20 17:14:45 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/03/25 23:20:51 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,14 @@ char	*ft_strmap(char const *s, char (*f)(char));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strsub(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_str_toupper(char *src);
 char	*ft_strtrim(char const *s);
-char	*ft_itoa(int n);
+char	*ft_itoa(long long n);
 char	**ft_strsplit(char const *s, char c);
 int		ft_strcmp(const char *str1, const char *str2);
 int		ft_strncmp(const char *str1, const char *str2, size_t n);
 int		ft_atoi(const char *s);
-int		ft_countdigits(long nb);
+int		ft_countdigits(long long nb, int base);
 int		ft_isdigit(int arg);
 int		ft_isalpha(int arg);
 int		ft_isalnum(int arg);

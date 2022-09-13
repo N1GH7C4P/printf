@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/31 06:58:36 by kpolojar          #+#    #+#             */
-/*   Updated: 2021/11/26 13:27:17 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/03/25 12:45:14 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,5 @@
 
 void	ft_putstr(const char *str)
 {
-	int	i;
-
-	i = 0;
-	while (!(str[i] == '\0'))
-	{
-		write(1, &str[i], 1);
-		i++;
-	}
+	write(1, str, ft_strlen(str));
 }

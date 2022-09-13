@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.h                                           :+:      :+:    :+:   */
+/*   ft_strtoupper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 16:02:10 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/01/21 02:08:00 by linuxlite        ###   ########.fr       */
+/*   Created: 2022/03/25 23:19:26 by linuxlite         #+#    #+#             */
+/*   Updated: 2022/03/25 23:54:50 by linuxlite        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
-# define BUFF_SIZE 100
-# include "libft/libft.h"
-#include <stdarg.h>
+#include "libft.h"
 
-int	ft_printf(char *str, ...);
+char	*ft_str_toupper(char *src)
+{
+	char	*dest;
+	int		i;
 
-#endif
+	if (!src)
+		return (ft_strnew(0));
+	dest = ft_strnew(ft_strlen(src));
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = (char)ft_toupper((int) src[i]);
+		i++;
+	}
+	return (dest);
+}

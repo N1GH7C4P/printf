@@ -25,7 +25,11 @@ int	counting_putchar(char c, t_dstr *s)
 int	counting_putstr(char *str, t_dstr *s)
 {
 	//print_info(s);
-	if (s->null)
+	if (!s->z_prec && s->is_zero)
+	{
+		counting_putchar('0', s);
+	}	
+	else if (s->null)
 	{
 		counting_putchar('\0', s);
 	}

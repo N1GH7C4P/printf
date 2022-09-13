@@ -19,7 +19,7 @@ static void	calculate_output_width(t_dstr *options)
 		options->digits = 0;
 	if(options->is_zero || options->z_prec || options->null)
 		options->prefix = 0;
-	if (options->width < options->digits + options->prefix && !options)
+	if (options->width < options->digits + options->prefix && !options->null)
 		options->width = options->digits + options->prefix;
 	if (options->width < options->precision && options->digits > 0)
 	{
@@ -27,7 +27,7 @@ static void	calculate_output_width(t_dstr *options)
 			options->precision++;
 		options->width = options->precision;
 	}
-	if (options->digits < options->width - options->prefix && !options->null)
+	if (options->digits < options->width - options->prefix)
 		options->padding = options->width - options->digits - options->prefix;
 }
 
@@ -95,6 +95,7 @@ void	modify_strings(char *input, t_dstr *options)
 	fill_with_padding(options);
 	copy_numbers(options, input);
 	handle_sign(options);
+	//print_info(options);
 	counting_putstr(options->content, options);
 	free(options->content);
 }

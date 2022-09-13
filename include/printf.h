@@ -29,6 +29,7 @@ typedef struct s_dstr
 	size_t	precision;
 	size_t	digits;
 	size_t	count;
+	size_t	lead0;
 	BOOL	prefix;
 	BOOL	z_pad;
 	BOOL	space;
@@ -40,6 +41,7 @@ typedef struct s_dstr
 	BOOL	z_prec;
 	BOOL	null;
 	BOOL	is_zero;
+
 }	t_dstr;
 
 // megastruct functions

@@ -21,21 +21,25 @@ static void	observe_minus_sign(t_dstr *options, char *str)
 
 static void	calculate_output_width(t_dstr *options)
 {
-	if (options->width < options->digits)
-		options->width = options->digits;
-	if (options->width < options->precision)
+	if(options->z_prec && options->null)
+		options->digits = 0;
+	if(options->is_zero || options->z_prec || options->null)
+		options->prefix = 0;
+	if (options->width < options->digits + options->prefix && !options->null)
+		options->width = options->digits + options->prefix;
+	if (options->width < options->precision && options->digits > 0)
 	{
 		if(options->is_negative || options->force_sign || options->space)
 			options->precision++;
 		options->width = options->precision;
 	}
-	if (options->digits < options->width)
-		options->padding = options->width - options->digits;
+	if (options->digits < options->width - options->prefix)
+		options->padding = options->width - options->digits - options->prefix;
 }
 
 static void	fill_with_padding(t_dstr *options)
 {
-	if (options->z_pad && options->padding && !options->dot)
+	if (options->z_pad && options->padding && !options->dot && !options->left)
 		ft_memset(options->content, '0', options->width);
 	else
 		ft_memset(options->content, ' ', options->width);
@@ -53,7 +57,7 @@ static void	copy_numbers(t_dstr *options, char *numbers)
 	if (numbers[0] == '-')
 		skip_minus_sign = 1;
 	if (options->left)
-		ft_memcpy(options->content + sign, numbers + skip_minus_sign, options->digits);
+		ft_memcpy(options->content + sign + options->lead0, numbers + skip_minus_sign, options->digits);
 	else if (options->padding)
 		ft_memcpy(options->content + options->padding, numbers + skip_minus_sign, options->digits);
 	else
@@ -111,19 +115,43 @@ static void	add_precision_zeroes(t_dstr *options)
 {
 	int diff;
 	int padd;
+	int i;
 
 	diff = options->precision - options->digits;
 	padd = options->width - options->digits - 1;
-	while (diff > 0)
+	if(!options->left)
 	{
-		options->content[padd--] = '0';
-		diff--;
+		while (diff > 0)
+		{
+			options->content[padd--] = '0';
+			diff--;
+		}
+	}
+	else
+	{
+		i = 0;
+		if(options -> is_negative || options->force_sign || options -> space)
+			i++;
+		while (diff > 0)
+		{
+			options->content[i] = '0';
+			options->lead0++;
+			diff--;
+			i++;
+		}
 	}
 }
 
 void	modify_integers(char *input, t_dstr *options)
 {
+	if (options->c == 'u')
+	{
+		options->force_sign = 0;
+		options->space = 0;
+	}
 	options->digits = count_digits(input);
+	if (options->z_prec && options->digits == 1 && input[0] == '0')
+		options->digits = 0;
 	observe_minus_sign(options, input);
 	calculate_output_width(options);
 	options->content = ft_strnew(options->width);
@@ -134,6 +162,7 @@ void	modify_integers(char *input, t_dstr *options)
 		add_precision_zeroes(options);
 	copy_numbers(options, input);
 	handle_sign(options);
+	//print_info(options);
 	counting_putstr(options->content, options);
 	free(options->content);
 }

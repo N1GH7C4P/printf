@@ -35,6 +35,7 @@ void	reset_all_but_count(t_dstr *dstr)
 	dstr->c = 0;
 	dstr->null = 0;
 	dstr->is_zero = 0;
+	dstr->lead0 = 0;
 }
 
 void	dstrdel(t_dstr *s)
@@ -69,6 +70,7 @@ t_dstr	*dstrnew(void)
 	dstr->null = 0;
 	dstr->count = 0;
 	dstr->is_zero = 0;
+	dstr->lead0 = 0;
 	return (dstr);
 }
 
@@ -137,6 +139,8 @@ void print_info(t_dstr *dstr)
 	ft_putendl("");
 	ft_putstr("  is_0: ");
 	ft_putnbr(dstr->is_zero);
+	ft_putstr(" lead0: ");
+	ft_putnbr(dstr->lead0);
 	ft_putendl("");
 	if(dstr->content)
 	{

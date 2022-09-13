@@ -21,9 +21,13 @@ static void	observe_minus_sign(t_dstr *options, char *str)
 
 static void	calculate_output_width(t_dstr *options)
 {
-	if (options->width < options->digits + options->prefix)
+	if(options->z_prec)
+		options->digits = 0;
+	if(options->is_zero || options->z_prec || options->null)
+		options->prefix = 0;
+	if (options->width < options->digits + options->prefix && !options->null)
 		options->width = options->digits + options->prefix;
-	if (options->width < options->precision)
+	if (options->width < options->precision && options->digits > 0)
 	{
 		if(options->is_negative || options->force_sign || options->space)
 			options->precision++;
@@ -35,7 +39,8 @@ static void	calculate_output_width(t_dstr *options)
 
 static void	fill_with_padding(t_dstr *options)
 {
-	if (options->z_pad && options->padding && !options->dot)
+	//print_info(options);
+	if (options->z_pad && options->padding && !options->dot && !options->left)
 		ft_memset(options->content, '0', options->width);
 	else
 		ft_memset(options->content, ' ', options->width);
@@ -108,6 +113,7 @@ void	modify_octals(char *input, t_dstr *options)
 		add_precision_zeroes(options);
 	copy_numbers(options, input);
 	handle_prefix(options);
+	//print_info(options);
     if (options->c == 'X')
     {
         temp = ft_str_toupper(options->content);

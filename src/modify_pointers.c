@@ -13,42 +13,14 @@
 #include "../include/printf.h"
 #include "../include/libft.h"
 
-static void	observe_minus_sign(t_dstr *options, char *str)
-{
-	if (str[0] == '-')
-		options->is_negative = 1;
-}
-
-static void	calculate_output_width(t_dstr *options)
-{
-	if (options->width <= options->digits)
-		options->width = options->digits + 2;
-	if (options->width < options->precision)
-	{
-		if(options->is_negative || options->force_sign || options->space)
-			options->precision++;
-		options->width = options->precision;
-	}
-	if (options->digits < options->width - 2)
-		options->padding = options->width - options->digits - 2;
-}
-
-static void	fill_with_padding(t_dstr *options)
-{
-	if (options->z_pad && options->padding && !options->dot)
-		ft_memset(options->content, '0', options->width);
-	else
-		ft_memset(options->content, ' ', options->width);
-}
-
 static void	copy_numbers(t_dstr *options, char *numbers)
 {
 	if (options->left)
-		ft_memcpy(options->content + 2, numbers, options->digits);
+		ft_memcpy(options->content + options->prefix, numbers, options->digits);
 	else if (options->padding)
-		ft_memcpy(options->content + options->padding + 2, numbers, options->digits);
+		ft_memcpy(options->content + options->padding + options->prefix, numbers, options->digits);
 	else
-		ft_memcpy(options->content + options->padding + 2, numbers, options->digits);
+		ft_memcpy(options->content + options->padding + options->prefix, numbers, options->digits);
 }
 
 
@@ -74,21 +46,6 @@ static void	handle_prefix(t_dstr *options)
 			place_prefix(options, 0);
 		else
 			place_prefix(options, i - 2);
-	}
-}
-
-
-static void	add_precision_zeroes(t_dstr *options)
-{
-	int diff;
-	int padd;
-
-	diff = options->precision - options->digits;
-	padd = options->width - options->digits - 1;
-	while (diff > 0)
-	{
-		options->content[padd--] = '0';
-		diff--;
 	}
 }
 

@@ -29,7 +29,7 @@ int	counting_putstr(char *str, t_dstr *s)
 	{
 		counting_putchar('0', s);
 	}	
-	else if (s->null)
+	else if (s->null && s->width < 2)
 	{
 		counting_putchar('\0', s);
 	}

@@ -94,13 +94,12 @@ void	modify_hexadecimals(char *input, t_dstr *options);
 void	modify_octals(char *input, t_dstr *options);
 void	modify_strings(char *input, t_dstr *options);
 
-//void	handle_sign(t_dstr *options);
-//void	copy_numbers(t_dstr *options, char *numbers);
-//void	fill_with_padding(t_dstr *options);
-//void	calculate_output_width(t_dstr *options);
-//void	observe_minus_sign(t_dstr *options, char *input);
-//size_t	count_digits(char *str);
-//void	add_precision_zeroes(t_dstr *options);
+void	calculate_output_width(t_dstr *options);
+void	fill_with_padding(t_dstr *options);
+void	observe_minus_sign(t_dstr *options, char *input);
+void	place_sign(t_dstr *options, int location);
+size_t	count_digits(char *str);
+void	add_precision_zeroes(t_dstr *options);
 
 // style
 

@@ -1,36 +1,6 @@
 #include "../include/printf.h"
 #include "../include/libft.h"
 
-static void	observe_minus_sign(t_dstr *options, char *str)
-{
-	if (str[0] == '-')
-		options->is_negative = 1;
-}
-
-static void	calculate_output_width(t_dstr *options)
-{
-	if (options->width < options->digits)
-		options->width = options->digits;
-	if (options->width < options->precision)
-	{
-		if(options->is_negative || options->force_sign || options->space)
-			options->precision++;
-		options->width = options->precision;
-	}
-    else if (options->width == options->digits && (options->is_negative || options->force_sign || options->space))
-        options->width++;
-	else if (options->digits < options->width)
-		options->padding = options->width - options->digits;
-}
-
-static void	fill_with_padding(t_dstr *options)
-{
-	if (options->z_pad && options->padding && !options->dot)
-		ft_memset(options->content, '0', options->width);
-	else
-		ft_memset(options->content, ' ', options->width);
-}
-
 static void	copy_numbers(t_dstr *options, char *numbers)
 {
 	int skip_minus_sign;
@@ -51,37 +21,6 @@ static void	copy_numbers(t_dstr *options, char *numbers)
     options->content[options->width] = '\0';
 }
 
-
-static size_t	count_digits(char *str)
-{
-	int		i;
-	size_t	count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-        if (str[i] == '.')
-            count++;
-		if (str[i] >= '0' && str[i] <= '9')
-			count++;
-		i++;
-	}
-	return count;
-}
-
-
-static void	place_sign(t_dstr *options, int location)
-{
-	if (options->is_negative)
-		options->content[location] = '-';
-	else if (options->force_sign)
-			options->content[location] = '+';
-	else if (options->space)
-		options->content[location] = ' ';
-}
-
-
 static void	handle_sign(t_dstr *options)
 {
 	int i;
@@ -97,20 +36,6 @@ static void	handle_sign(t_dstr *options)
 			place_sign(options, 0);
 		else
 			place_sign(options, i - 1);
-	}
-}
-
-static void	add_precision_zeroes(t_dstr *options)
-{
-	int diff;
-	int padd;
-
-	diff = options->precision - options->digits;
-	padd = options->width - options->digits - 1;
-	while (diff > 0)
-	{
-		options->content[padd--] = '0';
-		diff--;
 	}
 }
 

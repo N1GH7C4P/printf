@@ -13,39 +13,6 @@
 #include "../include/printf.h"
 #include "../include/libft.h"
 
-static void	observe_minus_sign(t_dstr *options, char *str)
-{
-	if (str[0] == '-')
-		options->is_negative = 1;
-}
-
-static void	calculate_output_width(t_dstr *options)
-{
-	if(options->z_prec)
-		options->digits = 0;
-	if(options->is_zero || options->z_prec || options->null)
-		options->prefix = 0;
-	if (options->width < options->digits + options->prefix && !options->null)
-		options->width = options->digits + options->prefix;
-	if (options->width < options->precision && options->digits > 0)
-	{
-		if(options->is_negative || options->force_sign || options->space)
-			options->precision++;
-		options->width = options->precision;
-	}
-	if (options->digits < options->width - options->prefix)
-		options->padding = options->width - options->digits - options->prefix;
-}
-
-static void	fill_with_padding(t_dstr *options)
-{
-	//print_info(options);
-	if (options->z_pad && options->padding && !options->dot && !options->left)
-		ft_memset(options->content, '0', options->width);
-	else
-		ft_memset(options->content, ' ', options->width);
-}
-
 static void	copy_numbers(t_dstr *options, char *numbers)
 {
 	if (options->left)
@@ -83,26 +50,13 @@ static void	handle_prefix(t_dstr *options)
 	}
 }
 
-
-static void	add_precision_zeroes(t_dstr *options)
-{
-	int diff;
-	int padd;
-
-	diff = options->precision - options->digits;
-	padd = options->width - options->digits - 1;
-	while (diff > 0)
-	{
-		options->content[padd--] = '0';
-		diff--;
-	}
-}
-
 void	modify_octals(char *input, t_dstr *options)
 {
     char *temp;
 
 	options->digits = ft_strlen(input);
+	if (options->z_prec && options->digits == 1 && input[0] == '0')
+		options->digits = 0;
 	observe_minus_sign(options, input);
 	calculate_output_width(options);
 	options->content = ft_strnew(options->width);

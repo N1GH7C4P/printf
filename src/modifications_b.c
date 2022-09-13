@@ -13,20 +13,28 @@
 #include "../include/printf.h"
 #include "../include/libft.h"
 
-void	apply_modifications(char *input, t_dstr *options)
+void	place_sign(t_dstr *options, int location)
 {
-	if (options -> c == 'i' || options -> c == 'd' || options -> c == 'u')
-		modify_integers(input, options);
-	else if (options -> c == 'f')
-		modify_floats(input, options);
-	else if (options -> c == 'p')
-		modify_pointers(input, options);
-	else if (options -> c == 'x' || options -> c == 'X')
-		modify_hexadecimals(input, options);
-	else if (options -> c == 'o')
-		modify_octals(input, options);
-	else if (options -> c == 's' || options -> c == 'c')
-		modify_strings(input, options);
-	free(input);
+	if (options->is_negative)
+		options->content[location] = '-';
+	else if (options->force_sign)
+			options->content[location] = '+';
+	else if (options->space)
+		options->content[location] = ' ';
 }
 
+size_t	count_digits(char *str)
+{
+	int		i;
+	size_t	count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if ((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
+			count++;
+		i++;
+	}
+	return count;
+}

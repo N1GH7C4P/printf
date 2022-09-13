@@ -13,38 +13,6 @@
 #include "../include/printf.h"
 #include "../include/libft.h"
 
-static void	observe_minus_sign(t_dstr *options, char *str)
-{
-	if (str[0] == '-')
-		options->is_negative = 1;
-}
-
-static void	calculate_output_width(t_dstr *options)
-{
-	if(options->z_prec && options->null)
-		options->digits = 0;
-	if(options->is_zero || options->z_prec || options->null)
-		options->prefix = 0;
-	if (options->width < options->digits + options->prefix && !options->null)
-		options->width = options->digits + options->prefix;
-	if (options->width < options->precision && options->digits > 0)
-	{
-		if(options->is_negative || options->force_sign || options->space)
-			options->precision++;
-		options->width = options->precision;
-	}
-	if (options->digits < options->width - options->prefix)
-		options->padding = options->width - options->digits - options->prefix;
-}
-
-static void	fill_with_padding(t_dstr *options)
-{
-	if (options->z_pad && options->padding && !options->dot && !options->left)
-		ft_memset(options->content, '0', options->width);
-	else
-		ft_memset(options->content, ' ', options->width);
-}
-
 static void	copy_numbers(t_dstr *options, char *numbers)
 {
 	int skip_minus_sign;
@@ -64,35 +32,6 @@ static void	copy_numbers(t_dstr *options, char *numbers)
 		ft_memcpy(options->content + options->padding + sign, numbers + skip_minus_sign, options->digits);
 }
 
-
-static size_t	count_digits(char *str)
-{
-	int		i;
-	size_t	count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		if (str[i] >= '0' && str[i] <= '9')
-			count++;
-		i++;
-	}
-	return count;
-}
-
-
-static void	place_sign(t_dstr *options, int location)
-{
-	if (options->is_negative)
-		options->content[location] = '-';
-	else if (options->force_sign)
-			options->content[location] = '+';
-	else if (options->space)
-		options->content[location] = ' ';
-}
-
-
 static void	handle_sign(t_dstr *options)
 {
 	int i;
@@ -108,37 +47,6 @@ static void	handle_sign(t_dstr *options)
 			place_sign(options, 0);
 		else
 			place_sign(options, i - 1);
-	}
-}
-
-static void	add_precision_zeroes(t_dstr *options)
-{
-	int diff;
-	int padd;
-	int i;
-
-	diff = options->precision - options->digits;
-	padd = options->width - options->digits - 1;
-	if(!options->left)
-	{
-		while (diff > 0)
-		{
-			options->content[padd--] = '0';
-			diff--;
-		}
-	}
-	else
-	{
-		i = 0;
-		if(options -> is_negative || options->force_sign || options -> space)
-			i++;
-		while (diff > 0)
-		{
-			options->content[i] = '0';
-			options->lead0++;
-			diff--;
-			i++;
-		}
 	}
 }
 

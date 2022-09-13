@@ -32,15 +32,15 @@ void	apply_modifications(char *input, t_dstr *options)
 
 void	calculate_output_width(t_dstr *options)
 {
-	if(options->z_prec && options->null)
+	if (options->z_prec && options->null)
 		options->digits = 0;
-	if(options->is_zero || options->z_prec || options->null)
+	if (options->is_zero || options->z_prec || options->null)
 		options->prefix = 0;
 	if (options->width < options->digits + options->prefix && !options->null)
 		options->width = options->digits + options->prefix;
 	if (options->width < options->precision && options->digits > 0)
 	{
-		if(options->is_negative || options->force_sign || options->space)
+		if (options->is_negative || options->force_sign || options->space)
 			options->precision++;
 		options->width = options->precision;
 	}
@@ -54,15 +54,14 @@ void	observe_minus_sign(t_dstr *options, char *str)
 		options->is_negative = 1;
 }
 
-void	add_precision_zeroes(t_dstr *options)
+void	add_precision_zeroes(t_dstr *options, int i)
 {
-	int diff;
-	int padd;
-	int i;
+	int	diff;
+	int	padd;
 
 	diff = options->precision - options->digits;
 	padd = options->width - options->digits - 1;
-	if(!options->left)
+	if (!options->left)
 	{
 		while (diff > 0)
 		{
@@ -72,8 +71,7 @@ void	add_precision_zeroes(t_dstr *options)
 	}
 	else
 	{
-		i = 0;
-		if(options -> is_negative || options->force_sign || options -> space)
+		if (options -> is_negative || options->force_sign || options -> space)
 			i++;
 		while (diff > 0)
 		{

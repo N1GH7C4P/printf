@@ -53,7 +53,7 @@ void	print_info(t_dstr *dstr);
 // numbers to str conversion
 char	*ft_itoabase(long long value, int base);
 char	*ft_unsigned_itoabase(unsigned long long value, int base);
-char	*ft_ftoa(long double n, size_t precision, long double f_part, long long	i_part);
+char	*ft_ftoa(long double n, size_t p, long double f_part, long long i_part);
 
 // printf
 int		ft_printf(char *str, ...);
@@ -99,7 +99,7 @@ void	fill_with_padding(t_dstr *options);
 void	observe_minus_sign(t_dstr *options, char *input);
 void	place_sign(t_dstr *options, int location);
 size_t	count_digits(char *str);
-void	add_precision_zeroes(t_dstr *options);
+void	add_precision_zeroes(t_dstr *options, int i);
 
 // style
 

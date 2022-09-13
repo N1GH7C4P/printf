@@ -13,59 +13,55 @@
 #include "../include/printf.h"
 #include "../include/libft.h"
 
-char	*add_zeroes(char *str, int precision)
+static char	*add_zeroes(char *str, int prec)
 {
 	char	*output;
 	int		chars;
 	int		dot_position;
 	int		len;
 
-	if (!precision)
+	if (!prec)
 		return (str);
 	chars = 1;
 	len = ft_strlen(str);
 	dot_position = find_dot(str);
-	output = ft_strnew(len + precision);
+	output = ft_strnew(len + prec);
 	ft_memcpy(output, str, len);
-	output[dot_position + precision + 1] = '\0';
-	while (precision)
+	output[dot_position + prec + 1] = '\0';
+	while (prec)
 	{
 		if (!str[dot_position + chars])
 			output[dot_position + chars] = '0';
-		precision--;
+		prec--;
 		chars++;
 	}
 	free(str);
 	return (output);
 }
 
-char	*round_number(int precision, int last_digit, char *str)
+static char	*round_number(int prec, int last_digit, char *str)
 {
-	char 	*temp;
-
-	if (!precision)
+	if (!prec)
 	{
 		if (str[0] >= '5' && (check_f_digits(str + 1) || last_digit % 2))
 			return (ft_strdup("1"));
 		return (ft_strnew(0));
 	}
-	temp = ft_strjoin(".", str);
-	str = ft_strdup(temp);
-	free(temp);
-	if (str[precision + 1] >= '5')
+	str = ft_strjoin(".", str);
+	if (str[prec + 1] >= '5')
 	{
 		if (!check_f_digits(str + 2) && last_digit % 2)
 			return (ft_strnew(0));
-		str[precision]++;
-		while (str[precision] > '9')
+		str[prec]++;
+		while (str[prec] > '9')
 		{
-			str[precision--] = '0';
-			if (str[precision - 1] == '.')
+			str[prec--] = '0';
+			if (str[prec - 1] == '.')
 			{
 				free(str);
 				return (ft_strdup("1"));
 			}
-			str[precision]++;
+			str[prec]++;
 		}
 	}
 	return (str);
@@ -81,22 +77,20 @@ static long double	to_whole_number(long double n, int pow)
 	return (n);
 }
 
-static char	*combine(long double f_part, long long i_part, size_t precision)
+static char	*combine(long double f_part, long long i_part, size_t prec, char *t)
 {
 	char	*i_str;
 	char	*f_str;
 	char	*res;
-	char	*temp;
 
-	f_part = to_whole_number(f_part, count_fdigits(f_part, precision + 1));
-	temp = ft_itoabase(f_part, 10);
-	f_str = round_number(precision, i_part % 10, temp);
-	free(temp);
+	f_part = to_whole_number(f_part, count_fdigits(f_part, prec + 1));
+	f_str = round_number(prec, i_part % 10, t);
+	free(t);
 	if (f_str[0] == '1')
 	{
 		i_part++;
 		i_str = ft_itoabase(i_part, 10);
-		if (precision > 0)
+		if (prec > 0)
 			res = ft_strjoin(i_str, ".");
 		else
 			res = ft_strdup(i_str);
@@ -111,11 +105,11 @@ static char	*combine(long double f_part, long long i_part, size_t precision)
 	return (res);
 }
 
-char	*ft_ftoa(long double n, size_t precision, long double f_part, long long	i_part)
+char	*ft_ftoa(long double n, size_t p, long double f_part, long long i_part)
 {
 	char	*res;
 	int		minus_sign;
-	char	*temp;
+	char	*t;
 
 	minus_sign = 0;
 	if (n < 0 || 1 / n < 0)
@@ -125,12 +119,12 @@ char	*ft_ftoa(long double n, size_t precision, long double f_part, long long	i_p
 	}
 	i_part = (long long)n;
 	f_part = n - i_part;
-	temp = combine(f_part, i_part, precision);
+	t = combine(f_part, i_part, p, ft_itoabase(f_part, 10));
 	if (minus_sign)
-		res = ft_strjoin("-", temp);
+		res = ft_strjoin("-", t);
 	else
-		res = ft_strdup(temp);
-	free(temp);
-	res = add_zeroes(res, precision);
+		res = ft_strdup(t);
+	free(t);
+	res = add_zeroes(res, p);
 	return (res);
 }

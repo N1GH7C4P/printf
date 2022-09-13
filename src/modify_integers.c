@@ -13,64 +13,63 @@
 #include "../include/printf.h"
 #include "../include/libft.h"
 
-static void	copy_numbers(t_dstr *options, char *numbers)
+static void	copy_nb(t_dstr *s, char *nb)
 {
-	int skip_minus_sign;
-	int sign;
+	int	skip_minus;
+	int	sign;
 
 	sign = 0;
-	skip_minus_sign = 0;
-	if ((options->is_negative || options->force_sign || options->space) && !options->z_prec)
+	skip_minus = 0;
+	if ((s->is_negative || s->force_sign || s->space) && !s->z_prec)
 		sign = 1;
-	if (numbers[0] == '-')
-		skip_minus_sign = 1;
-	if (options->left)
-		ft_memcpy(options->content + sign + options->lead0, numbers + skip_minus_sign, options->digits);
-	else if (options->padding)
-		ft_memcpy(options->content + options->padding, numbers + skip_minus_sign, options->digits);
+	if (nb[0] == '-')
+		skip_minus = 1;
+	if (s->left)
+		ft_memcpy(s->content + sign + s->lead0, nb + skip_minus, s->digits);
+	else if (s->padding)
+		ft_memcpy(s->content + s->padding, nb + skip_minus, s->digits);
 	else
-		ft_memcpy(options->content + options->padding + sign, numbers + skip_minus_sign, options->digits);
+		ft_memcpy(s->content + s->padding + sign, nb + skip_minus, s->digits);
 }
 
-static void	handle_sign(t_dstr *options)
+static void	handle_sign(t_dstr *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if (options->z_pad)
-		place_sign(options, 0);
+	if (s->z_pad)
+		place_sign(s, 0);
 	else
 	{
-		while(options->content[i] == ' ')
+		while (s->content[i] == ' ')
 			i++;
 		if (i == 0)
-			place_sign(options, 0);
+			place_sign(s, 0);
 		else
-			place_sign(options, i - 1);
+			place_sign(s, i - 1);
 	}
 }
 
-void	modify_integers(char *input, t_dstr *options)
+void	modify_integers(char *input, t_dstr *s)
 {
-	if (options->c == 'u')
+	if (s->c == 'u')
 	{
-		options->force_sign = 0;
-		options->space = 0;
+		s->force_sign = 0;
+		s->space = 0;
 	}
-	options->digits = count_digits(input);
-	if (options->z_prec && options->digits == 1 && input[0] == '0')
-		options->digits = 0;
-	observe_minus_sign(options, input);
-	calculate_output_width(options);
-	options->content = ft_strnew(options->width);
-	if(options->dot)
-		options->z_pad = 0;
-	fill_with_padding(options);
-	if (options->dot)
-		add_precision_zeroes(options);
-	copy_numbers(options, input);
-	handle_sign(options);
-	//print_info(options);
-	counting_putstr(options->content, options);
-	free(options->content);
+	s->digits = count_digits(input);
+	if (s->z_prec && s->digits == 1 && input[0] == '0')
+		s->digits = 0;
+	observe_minus_sign(s, input);
+	calculate_output_width(s);
+	s->content = ft_strnew(s->width);
+	if (s->dot)
+		s->z_pad = 0;
+	fill_with_padding(s);
+	if (s->dot)
+		add_precision_zeroes(s, 0);
+	copy_nb(s, input);
+	handle_sign(s);
+	counting_putstr(s->content, s);
+	free(s->content);
 }

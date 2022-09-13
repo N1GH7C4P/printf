@@ -9,7 +9,7 @@ OBJ_DIR		= src/
 TEST_DIR	= test/
 TEST_EXE	= run_test
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -O3 -fPIE
+CFLAGS		= -Wall -Werror -Wextra -O3
 RM			= rm -f
 AR			= ar rcs
 
@@ -53,7 +53,4 @@ fclean:		clean
 re:			fclean all
 			@echo "$(GREEN)Cleaned and rebuilt everything for ft_printf!$(DEF_COLOR)"
 
-norm:
-			@norminette $(SRC) $(INCLUDE) $(LIBFT) | grep -v Norme -B1 || true
-			
-.PHONY:		all clean fclean re norm
+.PHONY:		all clean fclean re

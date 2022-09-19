@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   formatting_a.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 16:11:55 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/04/01 01:18:56 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/09/19 16:15:31 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,10 @@ char	*format_pointers(t_dstr *s, va_list vl)
 	char	*temp;
 	size_t	len;
 
-	s->prefix = 1;
+	s->prefix = 2;
 	str = ft_itoabase(va_arg(vl, unsigned long long), 16);
 	len = ft_strlen(str);
-	if (!ft_strcmp("0", str))
-	{
-		str = ft_strdup("(nil)");
-		s->null = 1;
-		s->prefix = 0;
-	}
-	else if (len < s->precision)
+	if (len < s->precision)
 	{
 		temp = str;
 		str = ft_strnew(s->precision);

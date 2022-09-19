@@ -1,5 +1,5 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/kpolojar/Projects/printf'
+make: Entering directory `/Users/kpolojar/projects/printf'
 gcc -Wall -Werror -Wextra -O3 -fPIE   -c -o src/dstring.o src/dstring.c
 gcc -Wall -Werror -Wextra -O3 -fPIE   -c -o src/formatting_a.o src/formatting_a.c
 gcc -Wall -Werror -Wextra -O3 -fPIE   -c -o src/formatting_b.o src/formatting_b.c
@@ -9,9 +9,9 @@ gcc -Wall -Werror -Wextra -O3 -fPIE   -c -o src/handlers.o src/handlers.c
 gcc -Wall -Werror -Wextra -O3 -fPIE   -c -o src/modifications_a.o src/modifications_a.c
 gcc -Wall -Werror -Wextra -O3 -fPIE   -c -o src/modifications_b.o src/modifications_b.c
 gcc -Wall -Werror -Wextra -O3 -fPIE   -c -o src/printf.o src/printf.c
+ 
 gcc -Wall -Werror -Wextra -O3 -fPIE   -c -o src/ft_ftoa_helpers.o src/ft_ftoa_helpers.c
 gcc -Wall -Werror -Wextra -O3 -fPIE   -c -o src/modify_integers.o src/modify_integers.c
- 
 gcc -Wall -Werror -Wextra -O3 -fPIE   -c -o src/modify_floats.o src/modify_floats.c
 gcc -Wall -Werror -Wextra -O3 -fPIE   -c -o src/modify_pointers.o src/modify_pointers.c
 gcc -Wall -Werror -Wextra -O3 -fPIE   -c -o src/modify_hexadecimals.o src/modify_hexadecimals.c
@@ -22,5 +22,5 @@ cp libft/libft.a .
 mv libft.a libftprintf.a
 ar rcs libftprintf.a src/dstring.o src/formatting_a.o src/formatting_b.o src/ft_ftoa.o src/ft_itoabase.o src/handlers.o src/modifications_a.o src/modifications_b.o src/printf.o src/ft_ftoa_helpers.o src/modify_integers.o src/modify_floats.o src/modify_pointers.o src/modify_hexadecimals.o src/modify_octals.o src/modify_strings.o
 echo "\033[0;92mft_printf compiled!\033[0;39m"
-make: Leaving directory '/home/kpolojar/Projects/printf'
+make: Leaving directory `/Users/kpolojar/projects/printf'
  

@@ -10,7 +10,7 @@ OBJ_DIR		= src/
 TEST_DIR	= test/
 TEST_EXE	= run_test
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -O3 -fPIE
+CFLAGS		= -Wall -Werror -Wextra -O3
 RM			= rm -f
 AR			= ar rcs
 

@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:14:47 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/08/19 17:26:02 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/20 14:30:29 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ static void	parse(char *str, int i, t_dstr *output, va_list vl)
 			i += handle_style(output, str + i);
 			i += handle_flags(output, str + i);
 			i += handle_width(output, str + i);
-			if (str[i] == '%' && counting_putchar(str[i++], output))
+			if (str[i] == '%' && modify_percent_sign(output, i++))
 				continue ;
 			if (str[i] == '.')
 				i += handle_precision(output, str + i);
-			if (str[i] == '%' && counting_putchar(str[i++], output))
+			if (str[i] == '%' && modify_percent_sign(output, i++))
 				continue ;
 			i += handle_length(output, str + i);
 			handle_conversion(output, vl, str[i], NULL);

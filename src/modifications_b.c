@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   modifications.c                                    :+:      :+:    :+:   */
+/*   modifications_b.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:06:08 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/04/01 01:31:43 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/09/20 14:35:27 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,14 @@ size_t	count_digits(char *str)
 		i++;
 	}
 	return (count);
+}
+
+int	modify_percent_sign(t_dstr *s, int i)
+{
+	char	*str;
+
+	str = ft_strdup("%");
+	modify_strings(str, s);
+	free(str);
+	return (i);
 }

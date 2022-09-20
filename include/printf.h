@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 16:02:10 by kpolojar          #+#    #+#             */
-/*   Updated: 2022/04/01 01:26:54 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/09/20 14:23:42 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	modify_pointers(char *input, t_dstr *options);
 void	modify_hexadecimals(char *input, t_dstr *options);
 void	modify_octals(char *input, t_dstr *options);
 void	modify_strings(char *input, t_dstr *options);
+int		modify_percent_sign(t_dstr *s, int i);
 
 void	calculate_output_width(t_dstr *options);
 void	fill_with_padding(t_dstr *options);

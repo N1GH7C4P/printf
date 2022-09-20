@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   modifications.c                                    :+:      :+:    :+:   */
+/*   modify_strings.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:06:08 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/04/01 01:31:43 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/09/20 17:17:04 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,25 @@
 
 static void	padd_strings(t_dstr *s)
 {
+	if (s->null)
+	{
+		if (s->left)
+			counting_putchar(0, s);
+		if (s->padding)
+		{
+			s->padding--;
+			s->width--;
+		}
+	}
 	ft_memset(s->content, ' ', s->width);
 }
 
-static void	copy_nb(t_dstr *s, char *nb)
+static void	copy_str(t_dstr *s, char *str)
 {
-	int	skip_minus;
-	int	sign;
-
-	sign = 0;
-	skip_minus = 0;
-	if ((s->is_negative || s->force_sign || s->space) && !s->z_prec)
-		sign = 1;
-	if (nb[0] == '-')
-		skip_minus = 1;
 	if (s->left)
-		ft_memcpy(s->content + sign, nb + skip_minus, s->digits);
-	else if (s->padding)
-		ft_memcpy(s->content + s->padding, nb + skip_minus, s->digits);
+		ft_memcpy(s->content, str, s->digits);
 	else
-		ft_memcpy(s->content + s->padding + sign, nb + skip_minus, s->digits);
+		ft_memcpy(s->content + s->padding, str, s->digits);
 }
 
 void	modify_strings(char *input, t_dstr *s)
@@ -45,7 +44,9 @@ void	modify_strings(char *input, t_dstr *s)
 	if (s->dot)
 		s->z_pad = 0;
 	padd_strings(s);
-	copy_nb(s, input);
+	copy_str(s, input);
 	counting_putstr(s->content, s);
+	if (s->null && !s->left)
+		counting_putchar(0, s);
 	free(s->content);
 }

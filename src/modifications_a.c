@@ -6,87 +6,87 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:06:08 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/09/20 14:24:46 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/20 18:26:41 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/printf.h"
 #include "../include/libft.h"
 
-void	apply_modifications(char *input, t_dstr *options)
+void	apply_modifications(char *input, t_dstr *s)
 {
-	if (options -> c == 'i' || options -> c == 'd' || options -> c == 'u')
-		modify_integers(input, options);
-	else if (options -> c == 'f')
-		modify_floats(input, options);
-	else if (options -> c == 'p')
-		modify_pointers(input, options);
-	else if (options -> c == 'x' || options -> c == 'X')
-		modify_hexadecimals(input, options);
-	else if (options -> c == 'o')
-		modify_octals(input, options);
-	else if (options -> c == 's' || options -> c == 'c')
-		modify_strings(input, options);
+	if (s -> c == 'i' || s -> c == 'd' || s -> c == 'u')
+		modify_integers(input, s);
+	else if (s -> c == 'f')
+		modify_floats(input, s);
+	else if (s -> c == 'p')
+		modify_pointers(input, s);
+	else if (s -> c == 'x' || s -> c == 'X')
+		modify_hexadecimals(input, s);
+	else if (s -> c == 'o')
+		modify_octals(input, s);
+	else if (s -> c == 's' || s -> c == 'c')
+		modify_strings(input, s);
 	free(input);
 }
 
-void	calculate_output_width(t_dstr *options)
+void	calculate_output_width(t_dstr *s)
 {
-	if (options->z_prec && options->null)
-		options->digits = 0;
-	if (options->is_zero || options->z_prec || options->null)
-		options->prefix = 0;
-	if (options->width < options->digits + options->prefix && !options->null)
-		options->width = options->digits + options->prefix;
-	if (options->width < options->precision && options->digits > 0)
+	if (s->z_prec && s->null)
+		s->digits = 0;
+	if (((s->null || s->is_zero) && s->c != 'o'))
+		s->prefix = 0;
+	if (s->width < s->digits + s->prefix && !s->null)
+		s->width = s->digits + s->prefix;
+	if (s->width < s->precision && s->digits > 0)
 	{
-		if (options->is_negative || options->force_sign || options->space)
-			options->precision++;
-		options->width = options->precision;
+		if (s->is_negative || s->force_sign || s->space)
+			s->precision++;
+		s->width = s->precision;
 	}
-	if (options->digits < options->width - options->prefix)
-		options->padding = options->width - options->digits - options->prefix;
+	if (s->digits < s->width - s->prefix)
+		s->padding = s->width - s->digits - s->prefix;
 }
 
-void	observe_minus_sign(t_dstr *options, char *str)
+void	observe_minus_sign(t_dstr *s, char *str)
 {
 	if (str[0] == '-')
-		options->is_negative = 1;
+		s->is_negative = 1;
 }
 
-void	add_precision_zeroes(t_dstr *options, int i)
+void	add_precision_zeroes(t_dstr *s, int i)
 {
 	int	diff;
 	int	padd;
 
-	diff = options->precision - options->digits;
-	padd = options->width - options->digits - 1;
-	if (!options->left)
+	diff = s->precision - s->digits;
+	padd = s->width - s->digits - 1;
+	if (!s->left)
 	{
 		while (diff > 0)
 		{
-			options->content[padd--] = '0';
+			s->content[padd--] = '0';
 			diff--;
 		}
 	}
 	else
 	{
-		if (options -> is_negative || options->force_sign || options -> space)
+		if (s -> is_negative || s->force_sign || s -> space)
 			i++;
 		while (diff > 0)
 		{
-			options->content[i] = '0';
-			options->lead0++;
+			s->content[i] = '0';
+			s->lead0++;
 			diff--;
 			i++;
 		}
 	}
 }
 
-void	fill_with_padding(t_dstr *options)
+void	fill_with_padding(t_dstr *s)
 {
-	if (options->z_pad && options->padding && !options->dot && !options->left)
-		ft_memset(options->content, '0', options->width);
+	if (s->z_pad && s->padding && !s->dot && !s->left)
+		ft_memset(s->content, '0', s->width);
 	else
-		ft_memset(options->content, ' ', options->width);
+		ft_memset(s->content, ' ', s->width);
 }

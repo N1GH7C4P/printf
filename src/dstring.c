@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dstring.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linuxlite <linuxlite@student.42.fr>        +#+  +:+       +#+        */
+/*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/11 15:46:38 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/04/01 01:18:54 by linuxlite        ###   ########.fr       */
+/*   Updated: 2022/09/20 16:18:33 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,9 @@ void	print_info(t_dstr *dstr)
 	ft_putendl("");
 	if (dstr->content)
 	{
-		ft_putstr("content: ");
-		ft_putendl(dstr->content);
+		ft_putstr("content: |");
+		ft_putstr(dstr->content);
+		ft_putendl("|");
 	}
 	ft_putendl("#########################################");
 }

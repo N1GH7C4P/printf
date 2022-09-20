@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 16:13:34 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/09/20 14:25:00 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:39:16 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,8 @@ int	handle_precision(t_dstr *options, char *input)
 		i += ft_countdigits(options->precision, 10);
 		return (i);
 	}
-	else
-	{
-		options->precision = 0;
+	if (i > 0)
 		options->z_prec = 1;
-	}
 	return (i);
 }
 

@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 14:06:08 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/09/20 14:35:27 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:12:23 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,12 @@ int	modify_percent_sign(t_dstr *s, int i)
 {
 	char	*str;
 
-	str = ft_strdup("%");
+	if (s->precision)
+		str = ft_strsub("%", 0, s->precision);
+	else
+		str = ft_strdup("%");
+	if (str)
+		s->digits = ft_strlen(str);
 	modify_strings(str, s);
 	free(str);
 	return (i);

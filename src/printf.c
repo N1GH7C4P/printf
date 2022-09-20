@@ -6,7 +6,7 @@
 /*   By: kpolojar <kpolojar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 01:14:47 by linuxlite         #+#    #+#             */
-/*   Updated: 2022/09/20 14:30:29 by kpolojar         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:09:38 by kpolojar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,8 @@ int	counting_putchar(char c, t_dstr *s)
 
 int	counting_putstr(char *str, t_dstr *s)
 {
-	if (!s->z_prec && s->is_zero)
-	{
-		counting_putchar('0', s);
-	}	
-	else if (s->null && s->width < 2)
-	{
-		counting_putchar('\0', s);
-	}
-	else
-	{
-		s->count += ft_strlen(str);
-		ft_putstr(str);
-	}	
+	s->count += ft_strlen(str);
+	ft_putstr(str);
 	return (1);
 }
 

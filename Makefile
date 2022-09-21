@@ -50,17 +50,14 @@ clean:
 fclean:		clean
 			@$(RM) -f $(NAME)
 			@$(RM) -f $(LIBFT)/libft.a
-			@echo "$(CYAN)ft_printf executable files cleaned!$(DEF_COLOR)"
-			@echo "$(CYAN)libft executable files cleaned!$(DEF_COLOR)"
+			@echo "$(CYAN)ft_printf binary files cleaned!$(DEF_COLOR)"
+			@echo "$(CYAN)libft binary files cleaned!$(DEF_COLOR)"
 
 re:			fclean all
-			@echo "$(GREEN)Cleaned and rebuilt everything for ft_printf!$(DEF_COLOR)"
-
-norm:
-			@norminette $(SRC) $(INCLUDE) $(LIBFT) | grep -v Norme -B1 || true
+			@echo "$(GREEN)Rebuilt ft_printf!$(DEF_COLOR)"
 
 test:		re
 			${CC} ${TEST} -L . -l ${PRINTFLIB} -o ${TEST_EXE} -fsanitize=address -g
 			./${TEST_EXE}
 			
-.PHONY:		all clean fclean re norm
+.PHONY:		all clean fclean re
